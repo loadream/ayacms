@@ -1,0 +1,54 @@
+{template 'header'}
+<style>
+.level .icon-star{
+	font-size: 16px;
+}
+</style>
+<div class="row">
+  <div class="col-md-2">
+  <diy>
+<diyitem>{diy 'article_title','channelid=$channelid&number=8&page=1&title=最新'}</diyitem></diy>
+  </div>
+  <div class="col-md-10">
+  
+  {tag 'pathnav'}
+  
+  <div class="article" style="padding-top:0">
+          <header>
+            <h1 class="text-center" >{$title}</h1>
+            <dl class="dl-inline">
+              <dt class="text-hide">{l('提交时间')}：</dt>
+          <dd>{date('Y-m-d H:i:s',$posttime)}</dd>
+          <dt class="text-hide">{l('作者')}：</dt>
+          <dd class="text-hide">{$author}</dd>
+              <dt></dt>
+              <dd class="pull-right level text-primary">{if $new} <span class="label label-warning">{l('新')}</span> {/if}{if $hot}<span class="label label-warning">{l('热')}</span> {/if}{if $level} <span class="label label-info">{l('推荐')}</span> {/if}</dd>
+            </dl>
+            <section class="abstract">
+              <p><strong>{l('摘要')}：</strong>{$note}</p>
+            </section>
+          </header>
+  {fields_show()}
+          <section class="article-content">
+{dhtml($content)}
+          </section>
+          
+<diy>
+<diyitem>{diy "share_baidu","size=24&align=right"}</diyitem></diy>
+      <footer>
+        <p class="pull-right text-muted"> {l('查看')}：{$hits} </p>
+        <p class="text-important">
+        {if $tag}tags:{else}&nbsp;{/if} 
+          {loop $tag $k $v} <span class="label"><a href="{$v['url']}">{$v['name']}</a></span> {/loop}</p>
+        <ul class="pager pager-justify">
+          <li class="previous {$previous[class]}"><a href="{$previous[url]}"><i class="icon-arrow-left"></i> {$previous[title]}</a></li>
+          <li><a href="{AYA_URL}{$c_dirname}/"><i class="icon-list-ul"></i> {l('目录')}</a></li>
+          <li class="next {$next[class]}"><a href="{$next[url]}">{$next[title]} <i class="icon-arrow-right"></i></a></li>
+        </ul>
+      </footer>
+    </div>
+  {template 'comment'}
+  </div>
+</div>
+
+{template 'footer'}

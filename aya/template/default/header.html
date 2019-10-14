@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="{AYA_LANG}">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>{tag 'title'}</title>
+<meta name="Description" content="{tag 'description'}">
+<meta name="Keywords" content="{tag 'keywords'}">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="{AYA_TURL}aya/css/zui.min.css" rel="stylesheet">
+<link id="theme_css" href="{AYA_TURL}aya/css/{$T[theme_css]}" rel="stylesheet">
+<link href="{AYA_TURL}aya/lib/datetimepicker/datetimepicker.css" rel="stylesheet">
+<link href="{AYA_URL}aya/include/uploadifive/uploadifive.css" rel="stylesheet">
+
+    <script src="{AYA_TURL}aya/js/jquery-1.11.0.min.js"></script>
+    <script src="{AYA_TURL}aya/js/jquery-migrate-1.2.1.min.js"></script>
+    <script src="{AYA_TURL}aya/js/jquery.cookie.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="{AYA_TURL}aya/js/zui.min.js"></script>
+    <!--[if lt IE 9]>
+  <script src="{AYA_TURL}aya/js/html5shiv.js"></script>
+  <script src="{AYA_TURL}aya/js/respond.min.js"></script>
+<![endif]-->
+
+
+  <script src="{AYA_TURL}aya/lib/datetimepicker/datetimepicker.min.js"></script>
+  <script src="{AYA_TURL}aya/lib/chosen/chosen.min.js"></script>
+  <script src="{AYA_TURL}aya/lib/chosen/chosen.icons.min.js" type="text/javascript"></script>
+    <script src="{AYA_URL}aya/include/uploadifive/jquery.uploadifive.min.js" type="text/javascript"></script>
+   <script type="text/javascript">
+  var AYA_URL="{AYA_URL}";
+  var AYA_TURL="{AYA_TURL}";
+ $(function(){
+	 open_msg();	 
+	 });
+</script>
+<script src="{AYA_TURL}aya/index.js"></script>
+ 
+</head>
+
+<body style="{$T[body]}">
+{set_theme()}
+<div class="boards">
+<!--[if lt IE 8]>
+        <div class="alert alert-danger">您正在使用 <strong>过时的</strong> 浏览器. 是时候 <a href="http://browsehappy.com/">更换一个更好的浏览器</a> 来提升用户体验.</div>
+<![endif]-->
+
+
+<div class="container" style="{$T[container]}">
+<div class="boxed">
+<div class="header">
+<div class="row">
+  <div class="col-md-8"></div>
+  <div class="col-md-4">
+  <div class="pull-right">
+{tag 'usernav'} {tag 'lang'}
+</div>
+</div>
+</div>
+<div class="row">
+  <div class="col-md-9">
+<diy>
+<diyitem>{diy 'apic','itemid=2&padding=0 0 10px'}</diyitem></diy>  
+</div>
+  <div class="col-md-3">
+  <div class="mt-20"></div>
+{tag 'search'}
+</div>
+
+</div>
+
+
+{tag 'navbar'}
+</div>
+
+<div class="main">
+
+<layer></layer>

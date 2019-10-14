@@ -1,0 +1,82 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side',$c_module}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+      <legend>表单&nbsp;&nbsp;<small>[{$ALLLANG[$CHANNEL['language']]}] {$CHANNEL['name']}</small></legend>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:">列表</a></li>
+        <li><a href="{AYA_ADMIN_URL}?action=field_add&channelid={$channelid}&in_module=1">新建</a></li>
+      </ul>
+      <div class="mt-20"></div>
+      <button id="order_0" type="button" class="btn btn-info btn-mini" data-remote="{AYA_ADMIN_URL}?action=field_order&channelid={$channelid}&in_module=1&in_modal=1" data-toggle="modal"><span class="icon-sort-by-attributes"></span> 排序</button>
+      <div class="mt-5"></div>
+      <form class="form-horizontal" role="form" id="{random()}" action="{AYA_ADMIN_URL}?action=field_del&channelid={$channelid}&in_module=1"
+	method="post" onsubmit="if(confirm('确定要删除吗?')) aya_post(this.id);return false;">
+
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th style="width: 40px"> </th>
+                  <th>ID</th>
+                  <th>名称</th>
+                  <th>标题</th>
+                  <th>表单类型</th>
+                  <th>界面交互 / 呈现样式</th>
+                  <th>标签(显示数值/编辑数值)</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              
+              {loop $items $k $v}
+              <tr>
+                <td><input name="posts[ids][]" type="checkbox" value="{$k}" /></td>
+                <td>{$v[itemid]}</td>
+                <td>{$v[name]}</td>
+                <td>{$v[title]}</td>
+                <td>{$v[html]}</td>
+                <td><?php echo $v[display]?'√':'X'?> / <?php echo $v[front]?'√':'X'?></td>
+                <td>{field("{$v[name]}")} / {field_edit("{$v[name]}")}</td>
+                <td><button type="button" class="btn btn-default btn-mini" onclick="if(confirm('确定要删除吗?')) aya_get('{AYA_ADMIN_URL}?action=field_del&channelid={$channelid}&in_module=1&name={$v[name]}')"><span class="icon-remove"></span></button>
+                  &nbsp;<button type="button" class="btn btn-primary btn-mini" onclick="location='{AYA_ADMIN_URL}?action=field_edit&channelid={$channelid}&in_module=1&name={$v[name]}'"><span class="icon-edit"></span> 编辑</button>
+                  </td>
+              </tr>
+              {/loop}
+                </tbody>
+              
+            </table>
+<div class="help-block">
+<?php if(in_array($c_module,array('onepage','book','member'))){?>
+表单的创建与删除,将同步所有同模型的栏目.
+<?php }?>
+</div>
+            <button type="submit" class="btn btn-danger">删除</button>
+            <button type="button" id="checkall" class="btn btn-default">全选</button>
+            {$pages} 
+            
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+
+
+
+$("#checkall").click(function(){
+	if($(this).html()=='全选'){
+		   $("input[name='posts[ids][]']").each(function(){
+     $(this).prop("checked",true);
+   });
+   $(this).html('反选');
+   }else{
+			   $("input[name='posts[ids][]']").each(function(){
+     $(this).prop("checked",false);
+   });
+   $(this).html('全选');	
+		}
+
+   });
+
+</script> 
+{template 'footer'}

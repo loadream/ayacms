@@ -1,0 +1,54 @@
+{template 'header'}
+
+<div id="side_box" class="side_box">{tag 'side',$c_module}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+    <legend>权限&nbsp;&nbsp;<small>[{$ALLLANG[$CHANNEL['language']]}] {$CHANNEL['name']}</small></legend>
+    
+      <div class="mt-20"></div>
+    <form class="form-horizontal" id="{random()}" action="{AYA_ADMIN_URL}?action=pv&channelid={$channelid}&in_module=1"
+	method="post" autocomplete="off"
+	onsubmit="aya_post(this.id);return false;">
+    
+     
+     <div class="form-group">
+        <label class="col-md-1 control-label">允许访问</label>
+        <div class="col-md-11">
+      
+      {loop $GROUP $k $v}
+            <label class="checkbox-inline"> <input type="checkbox" name="posts[pv][in][{$k}]" value="1" {if isset($pv[in][$k])}checked="checked"{/if}>{l($v)} </label>
+            {/loop}
+            <div class="help-block">全不选,表示都允许访问</div>
+            </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-md-offset-1 col-md-11">
+        <button type="submit" class="btn btn-primary">提交</button>
+          <button type="reset" class="btn btn-default">重置</button>
+        </div>
+      </div>
+    </form>
+ 
+   <!-- end -->     
+     </div>
+  </div>
+</div>
+<script type="text/javascript"> 
+ if($.fn.datetimepicker)
+ {
+     $('.form-datetime').datetimepicker(
+     {
+         weekStart: 1,
+         todayBtn:  1,
+         autoclose: 1,
+         todayHighlight: 1,
+         startView: 2,
+         forceParse: 0,
+         showMeridian: 1,
+         format: 'yyyy-mm-dd hh:ii'
+     });
+ }
+</script>
+{template 'footer'}

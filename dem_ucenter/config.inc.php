@@ -1,0 +1,3 @@
+<?php
+	$channelid=7;
+	

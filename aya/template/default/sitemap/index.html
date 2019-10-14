@@ -1,0 +1,64 @@
+ {template 'header'}
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+{tag 'pathnav'}
+		<div class="mt-20"></div>
+		<?php
+
+foreach($LANG as $lang){?>
+		<h3>
+			<?php echo $ALLLANG[$lang]?>
+		</h3>
+		<ul>
+			<?php
+		  if(is_array($LEVEL[$lang][0])){
+		  foreach($LEVEL[$lang][0] as $id){
+			  if(!$LEVEL[$lang][$id]){
+			  ?>
+
+			<li><a
+				href="<?php echo AYA_URL; if(!($k<1 && $CHANNELS[$id]['language']==$LANG[0])) echo $CHANNELS[$id]['path'];?>">
+					<?php echo html($CHANNELS[$id]['name'])?>
+			</a></li>
+			<?php
+			  }else{
+			  ?>
+
+			<li><a
+				href="<?php echo AYA_URL,$CHANNELS[$id]['path']?>">
+					<?php echo html($CHANNELS[$id]['name'])?>
+			</a>
+				<ul>
+					<?php foreach($LEVEL[$lang][$id] as $sid){
+				  ?>
+					<li><a
+						href="<?php echo AYA_URL,$CHANNELS[$sid]['path']?>">
+							<?php echo html($CHANNELS[$sid]['name'])?>
+					</a></li>
+					<?php
+			  }?>
+				</ul></li>
+
+			<?php
+			  }
+		  }
+		  }
+?>
+			<div class="mt-20"></div>
+			<?php
+}
+?>
+		</ul>
+
+	</div>
+	<div class="col-md-2"></div>
+</div>
+
+<div class="mt-50"></div>
+<script type="text/javascript">
+	
+</script>
+
+{template 'footer'}
+

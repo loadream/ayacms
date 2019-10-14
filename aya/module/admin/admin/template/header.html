@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html lang="<?php echo AYA_LANG;?>">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title><?php include tag('title');?></title>
+<meta name="Description" content="<?php include tag('description');?>">
+<meta name="Keywords" content="<?php include tag('keywords');?>">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="<?php echo AYA_TURL;?>aya/css/zui.min.css" rel="stylesheet">
+<link href="<?php echo AYA_TURL;?>aya/lib/datetimepicker/datetimepicker.css" rel="stylesheet">
+<link href="<?php echo AYA_URL;?>aya/include/uploadifive/uploadifive.css" rel="stylesheet">
+<link href="<?php echo AYA_TURL;?>aya/index.css" rel="stylesheet">
+    <!-- jQuery (ZUI中的Javascript组件依赖于jQuery) -->
+    <script src="<?php echo AYA_TURL;?>aya/js/jquery-1.11.0.min.js"></script>
+    <script src="<?php echo AYA_TURL;?>aya/js/jquery.cookie.js"></script>
+    <!-- ZUI Javascript组件 -->
+    <script src="<?php echo AYA_TURL;?>aya/js/zui.min.js"></script>
+    <!--[if lt IE 9]>
+  <script src="<?php echo AYA_TURL;?>aya/js/html5shiv.js"></script>
+  <script src="<?php echo AYA_TURL;?>aya/js/respond.min.js"></script>
+<![endif]-->
+  <script src="<?php echo AYA_TURL;?>aya/lib/datetimepicker/datetimepicker.min.js"></script>
+  <script src="<?php echo AYA_TURL;?>aya/lib/chosen/chosen.min.js"></script>
+  <script src="<?php echo AYA_TURL;?>aya/lib/chosen/chosen.icons.min.js" type="text/javascript"></script>
+  <script src="<?php echo AYA_URL;?>aya/include/uploadifive/jquery.uploadifive.min.js" type="text/javascript"></script>
+   <script type="text/javascript">
+  var AYA_ADMIN_URL="<?php echo AYA_ADMIN_URL;?>";
+    
+ $(function(){
+ open_msg();
+ 
+ });
+
+</script>
+
+<script src="<?php echo AYA_TURL;?>aya/jquery.scrollUp.min.js"></script> 
+<script src="<?php echo AYA_TURL;?>aya/index.js"></script>
+</head>
+<body>
+<!--[if lt IE 8]>
+        <div class="alert alert-danger">您正在使用 <strong>过时的</strong> 浏览器. 是时候 <a href="http://browsehappy.com/">更换一个更好的浏览器</a> 来提升用户体验.</div>
+<![endif]-->
+<div class="container-fluid">
+<div class="row">
+ <div class="col-md-12"> 
+ <div style="padding:10px 0px">
+  <div class="pull-left">{tag 'mainmenu'}</div>
+  <div class="pull-right">{tag 'lang'}</div>
+  <div class="pull-right"> &nbsp;&nbsp;&nbsp;&nbsp;</div>
+  <div class="pull-right">{tag 'usernav'}</div>
+  <div class="clearfix"></div>
+  </div>
+  </div>
+</div>
+<div class="header {if $_COOKIE[fix_navbar]}in{else}collapse{/if}" id="channelmenu">
+{tag 'navbar'}
+</div>
+<div id="container">

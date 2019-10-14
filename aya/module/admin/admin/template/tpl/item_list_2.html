@@ -1,0 +1,27 @@
+{loop $items $item}
+<div class="item">
+              <div class="item-heading">
+              <span class="pull-right level"><i class="icon-star {$item[stat][1]}"></i><i class="icon-star {$item[stat][2]}"></i><i class="icon-star {$item[stat][3]}"></i><i class="icon-star {$item[stat][4]}"></i><i class="icon-star {$item[stat][5]}"></i></span>
+                <h4>{if $item['new']}<span class="label label-success">New</span>&nbsp; {/if}<a style="color:{$item[color]}" href="?action=edit&channelid={$channelid}&in_module=1&itemid={$item[itemid]}">{$item[title]}</a> <a href="{$item[url]}" target="_blank"><span class="icon-external-link"></span></a></h4>
+              </div>
+              <div class="item-content">
+              {if $item['thumb']}
+                <div class="media pull-left">
+        <img class="img-rounded" style="width:150px;height:100px;" src="{get_3x2($item['thumb'])}" />
+          
+                  
+                </div>
+                {/if}
+                <div class="text">
+                  {$item[note]}
+                </div>
+              </div>
+              <div class="item-footer">
+              <input name="posts[ids][]" type="checkbox" value="{$item['itemid']}" />
+                <span class="text-muted"><i class="icon-time"></i> {$item['posttime']}</span>
+                <span class="text-muted"><i class="icon-eye-open"></i> {$item['hits']}</span>
+                <span class="text-muted"><a href="javascript:void(0)" onclick="if(confirm('确定要删除吗?')) aya_get('?action=del&channelid={$channelid}&in_module=1&itemid={$item[itemid]}')" style="color:red"><i class="icon-remove"></i></a></span>
+               
+              </div>
+            </div>
+            {/loop}

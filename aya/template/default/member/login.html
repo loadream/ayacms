@@ -1,0 +1,54 @@
+{template 'header'}
+<div class="row">
+  <div class="col-md-2"> </div>
+  <div class="col-md-8">
+    <form class="form-horizontal" id="{random()}" action=""
+	method="post" autocomplete="off"
+	onsubmit="aya_post(this.id);return false;">
+      <legend>{l('登陆')}</legend>
+      <div class="form-group">
+        <label class="col-md-2 control-label required">{l('用户名')}</label>
+        <div class="col-md-4">
+          <input type="text" name="posts[name]" id="name" value="" class="form-control">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label required">{l('密码')}</label>
+        <div class="col-md-4">
+          <input type="password" name="posts[password]" id="password" value="" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-2 control-label required">{l('验证码')}</label>
+        <div class="col-md-4">
+         <input type="text"  id="checkcode" name="posts[checkcode]" class="form-control" placeholder="{l('请输入验证码')}" />
+         <div class="help-block">
+<a href="javascript:checkcode()"><img src="{AYA_URL}checkcode.php" id="_checkcode"/></a>
+</div>
+        </div>
+        
+      </div>
+      
+      
+      <div class="form-group">
+          <div class="col-md-offset-2 col-md-9">
+            <input type="submit" class="btn btn-primary" value="{l('提交')}" />
+            <input type="reset" class="btn btn-default" value="{l('重置')}" />
+          </div>
+        </div>
+    </form>
+  </div>
+  <div class="col-md-2"> </div>
+</div>
+<script type="text/javascript">
+
+function checkcode(){
+$('#_checkcode').attr('src','{AYA_URL}checkcode.php?'+Math.random());
+$("#checkcode").focus();
+}
+$("#username").focus();
+</script>
+
+
+{template 'footer'}

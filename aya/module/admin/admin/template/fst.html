@@ -1,0 +1,76 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side_fst'}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+  {tag 'fst_nav'}
+  
+    <div class="col-md-12">
+      
+    <table class="table table-condensed">
+      <thead>
+        <tr>
+          <th width="20"></th>
+          <th>名称</th>
+          <th>修改日期</th>
+          <th>类型</th>
+          <th>大小</th>
+          <th>权限</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+      {loop $info $v}
+        <tr>
+          <th>{if $v[filetype]=='dir'}<i class="icon-folder-close-alt"></i>{else}{/if}</th>
+          <td>
+          {if $v[url]}
+          <a href="{$v[url]}">{$v[basename]}</a>
+          {else}
+          {$v[basename]}{/if}</td>
+          <td>{$v[mtime]}</td>
+          <td>{$v[extension]}</td>
+          <td>{$v[filesize]}</td>
+          <td>{$v[r]} {$v[w]} </td>
+          <td>
+          <button type="button" class="btn btn-default btn-mini" onclick="if(confirm('确定要删除吗?')) aya_get('?action=fst_del&file={$v[file]}')"><span class="icon-remove"></span> </button>
+          {if $v[filetype]!='dir'}
+          <a class="btn btn-default btn-mini" href="?action=fst_down&file={$v[file]}"><span class="icon-download-alt"></span> </a>
+          {/if}
+          <button id="order_0" type="button" class="btn btn-default btn-mini" data-remote="?action=fst_rename&file={$v[file]}" data-toggle="modal"><span class="icon-edit"></span> 重命名</button>
+          
+          {if strtolower($v[extension])=='zip'}
+          <button class="btn btn-primary btn-mini" onclick="aya_get('?action=fst_zip&file={$v[file]}')"><span class="icon-level-down"></span> 解压</button>
+          {/if}
+          </td>
+          
+          
+          
+        </tr>
+       {/loop} 
+      </tbody>
+    </table>  
+      
+      
+    <form class="form-horizontal" action="?action=fst_upload&file={$file}"
+	method="post" enctype="multipart/form-data">
+    
+<div class="form-group">
+        <label for="upfile">上传文件</label>
+        <input type="file" id="upfile" name="upfile">
+        <div class="help-block">系统允许最大上传文件{ini_get('post_max_size')},如果文件较大,可能需要长时间等待</div>
+      </div>
+<button type="submit" class="btn btn-default">上传</button>
+        
+        
+      </form> 
+     
+     
+      
+      
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	 
+</script> 
+{template 'footer'}

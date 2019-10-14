@@ -1,0 +1,135 @@
+body {
+	background-repeat: repeat-x;
+	background-position: 0px 0px;
+	padding: 0 10px;
+	background-color: #50A2C5;
+}
+.header {
+}
+.header a.logo {
+	font-weight: bold;
+}
+.header a.logo img {
+	padding-top: 0px;
+	padding-bottom: 10px;
+}
+.footer {
+	line-height: 60px;
+	text-align: center;
+	height: 60px;
+	bottom: 0px;
+}
+.side_box{
+	background-color: #FFF;
+	width: 100px;
+	float: left;
+	border: 1px solid #dedede;
+	border-radius:4px;
+}
+.main_box{
+	margin-left: 110px;
+	background-color: #FFF;
+	padding: 10px 10px 30px;
+	border: 1px solid #dedede;
+	border-radius:4px;
+}
+.main_box_w{
+	float:right;width:100%;margin-left:-110px;
+}
+
+
+.header .navbar {
+margin-bottom: 10px;
+}
+/* aya */
+.messager-default .messager-content {
+}
+.messager-default .close-messager {
+	display:none;
+}
+.aya_loading {
+	background-image: url(image/loading.gif);
+	background-repeat: repeat;
+	background-position: 0px 0px;
+	display: block;
+	height: 15px;
+	width: 180px;
+	margin-right: -50px;
+}
+/* bs3 for aya g*/
+.btn-text {
+	color: #333;
+}
+.btn-text:hover {
+	background: 0 0;
+	cursor: default;
+}
+.label a {
+	color:#fff;
+}
+.article-content {
+	padding: 20px 15px;
+}
+.mt-5{
+	margin-top: 5px;	
+}
+.mt-10{
+	margin-top: 10px;	
+}
+.mt-15{
+	margin-top: 15px;	
+}
+.mt-20{
+	margin-top: 20px;	
+}
+.mt-25{
+	margin-top: 25px;	
+}
+.mt-30{
+	margin-top: 30px;	
+}
+.modal-body{
+	padding:20px 35px;	
+}
+/* 下拉菜单悬停 */
+.navbar .nav > li .dropdown-menu {
+}
+.navbar .nav > li:hover .dropdown-menu {
+	display: block;
+}
+
+/* top */
+#scrollUp {
+	bottom: -10px;
+	right: 30px;
+	width: 70px;
+	height: 70px;
+	padding: 10px 5px;
+	font-family: sans-serif;
+	font-size: 14px;
+	line-height: 20px;
+	text-align: center;
+	text-decoration: none;
+	text-shadow: 0 1px 0 #fff;
+	color: #828282;
+	-webkit-box-shadow: 0 0px 2px 1px rgba(0, 0, 0, 0.2);
+	-moz-box-shadow: 0 0px 2px 1px rgba(0, 0, 0, 0.2);
+	box-shadow: 0 0px 2px 1px rgba(0, 0, 0, 0.2);
+	background-color: #E6E6E6;
+	background-image: -moz-linear-gradient(top, #EBEBEB, #DEDEDE);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#EBEBEB), to(#DEDEDE));
+	background-image: -webkit-linear-gradient(top, #EBEBEB, #DEDEDE);
+	background-image: -o-linear-gradient(top, #EBEBEB, #DEDEDE);
+	background-image: linear-gradient(to bottom, #EBEBEB, #DEDEDE);
+	background-repeat: repeat-x;
+	-webkit-transition: bottom 150ms linear;
+	-moz-transition: bottom 150ms linear;
+	transition: bottom 150ms linear;
+}
+	#scrollUp:hover {
+		bottom: 0px;
+	}
+.messager.top {
+	top: 10%;
+}
+	

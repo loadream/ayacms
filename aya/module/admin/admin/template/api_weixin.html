@@ -1,0 +1,63 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side_api'}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+      <form class="form-horizontal" role="form" id="{random()}" action="{$pca}"
+	method="post" onsubmit="aya_post(this.id);return false;">
+    <legend>微信</legend>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:">基本</a></li>
+        <li><a href="{AYA_ADMIN_URL}?action=api_weixin_menu">菜单</a></li>
+      </ul>
+      <div class="mt-20"></div>
+         <div class="form-group">
+          <label class="col-md-2 control-label required">AppID(应用ID)</label>
+          <div class="col-md-2">
+            <input type="text" name="posts[appid]" id="appid" value="{$appid}" class="form-control">
+          </div>
+        </div>
+		<div class="form-group">
+          <label class="col-md-2 control-label required">AppSecret(应用密钥)</label>
+          <div class="col-md-2">
+            <input type="text" name="posts[appsecret]" id="appsecret" value="{$appsecret}" class="form-control">
+          </div>
+        </div>   
+    
+        <div class="form-group">
+          <label class="col-md-2 control-label">URL(服务器地址)</label>
+          <div class="col-md-2">
+            <input type="text" name="posts[url]" id="url" value="{AYA_URL}api.php?app=weixin" class="form-control" disabled>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label required">Token(令牌)</label>
+          <div class="col-md-2">
+            <input type="text" name="posts[token]" id="token" value="{$token}" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label"></label>
+          <div class="col-md-10">
+        <div class="help-block">
+        AppID,AppSecret应与微信"开发者中心"->"开发者ID"信息保持一致;<br />
+        URL,Token应于微信"开发者中心"->"服务器配置"保持一致;
+        <br />
+        <a href="https://mp.weixin.qq.com/" target="_weixin">点此</a>注册微信公众号
+        </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-9">
+            <button type="submit" class="btn btn-primary">提交</button>
+			<button type="reset" class="btn btn-default">重置</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	$("#aya_a").focus(); 
+</script> 
+{template 'footer'}

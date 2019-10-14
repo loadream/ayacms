@@ -1,0 +1,201 @@
+{template 'header'}
+<script type="text/javascript" charset="utf-8"
+	src="{AYA_URL}aya/include/ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8"
+	src="{AYA_URL}aya/include/ueditor/ueditor.all.js"></script>
+<div id="side_box" class="side_box">{tag 'side',$c_module}</div>
+<div class="main_box_w">
+	<div id="main_box" class="main_box">
+		<div class="col-md-12">
+			<legend>
+				信息&nbsp;&nbsp;<small>[{$ALLLANG[$CHANNEL['language']]}]
+					{$CHANNEL['name']}</small>
+			</legend>
+			<ul class="nav nav-tabs">
+				<li><a
+					href="{AYA_ADMIN_URL}?action=index&channelid={$channelid}&in_module=1">列表</a></li>
+				<li class="active"><a href="javascript:">新建</a></li>
+			</ul>
+			<div class="mt-20"></div>
+			<form class="form-horizontal" id="<?php echo $formid=random();?>"
+				action="{AYA_ADMIN_URL}?action=add&channelid={$channelid}&in_module=1"
+				method="post" autocomplete="off"
+				onsubmit="aya_post(this.id);return false;">
+				<div class="form-group">
+					<label class="col-md-1 control-label required">标题</label>
+					<div class="col-md-6">
+						<input type="text" name="posts[title]" id="title" value=""
+							class="form-control" style="color: {$color">
+					</div>
+					<div class="col-md-1">
+						<select class="form-control"
+							onchange="$('#title').css({color: this.value});"
+							name="posts[color]" id="color">
+							<option value="">默认</option> {loop $COLOR $k $v}
+							<option style="background-color: {$k" value="{$k}">{$v}</option>
+							{/loop}
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-1 control-label">副标题</label>
+					<div class="col-md-6">
+						<input type="text" name="posts[subtitle]" id="subtitle" value=""
+							class="form-control">
+					</div>
+				</div>
+				{loop $CS[0] $_k $_v}
+				<div class="form-group">
+					<label class="col-md-1 control-label">{html($_v)}</label>
+					<div class="col-md-11">
+						{loop $CS[$_k] $k $v} <label class="checkbox-inline"> <input
+							type="checkbox" name="posts[cs][]" value="{$k}">
+							{html($v)}
+						</label> {/loop}
+					</div>
+				</div>
+				{/loop}
+				<div class="form-group">
+					<label class="col-md-1 control-label">内容</label>
+					<div class="col-md-11">
+						{set_editor('content',$content,'height:400px')}</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-1 control-label">缩略图</label>
+					<div class="col-md-11">
+						{set_upload('posts[thumb]',AYA_URL.'ajax.php?fun=upload_thumb','pic')}
+					</div>
+				</div>
+
+				{fields_edit()}
+				<div class="form-group">
+					<label class="col-md-1 control-label">摘要</label>
+					<div class="col-md-6">
+						<textarea name="posts[note]" rows="3" class="form-control"
+							id="note"></textarea>
+					</div>
+					<div class="col-md-1">
+						<button type="button" class="btn btn-default" onclick="get_note()">自动提取</button>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-1 control-label">关键字</label>
+					<div class="col-md-6">
+						<input type="text" name="posts[keyword]" id="keyword" value=""
+							class="form-control">
+						<div class="help-block">供seo使用,填加在页keywords中</div>
+					</div>
+					<div class="col-md-1">
+						<button type="button" class="btn btn-default"
+							onclick="get_segment()">自动提取</button>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-1 control-label">Tag</label>
+					<div class="col-md-6">
+						<input type="text" name="posts[tag]" id="tag" value=""
+							class="form-control">
+						<div class="help-block">多tag用","分隔</div>
+					</div>
+					<div class="col-md-1">
+						<button type="button" class="btn btn-default"
+							onclick="$('#tag').val($('#keyword').val())">从"关键字"复制</button>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-1 control-label">标记</label>
+					<div class="col-md-2">
+						<input type="text" name="posts[sign]" id="sign" value=""
+							class="form-control">
+						<div class="help-block">供seo使用,填加在url中;字母或数字.</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-1 control-label">发表时间</label>
+					<div class="col-md-3">
+						<input type="text" name="posts[posttime]" id="posttime"
+							class="form-control form-datetime" placeholder="">
+						<div class="help-block">选择或者输入一个日期+时间：yyyy-MM-dd
+							hh:mm.留空表示当前时间</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-1 control-label">查看数</label>
+					<div class="col-md-2">
+						<input type="text" name="posts[hits]" id="hits" value=""
+							class="form-control">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-1 control-label">排序级别</label>
+					<div class="col-md-2">
+						<select class="form-control" name="posts[original]" id="original">
+
+
+							{php for($i=0;$i<10;$i++){}
+
+
+							<option value="{$i}">{$i}</option> {php }}
+
+
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-md-1 control-label">推荐度</label>
+					<div class="col-md-2">
+						<select class="form-control" name="posts[level]" id="level">
+
+
+							{php for($i=0;$i<10;$i++){}
+
+
+							<option value="{$i}">{$i}</option> {php }}
+
+
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-offset-1 col-md-11">
+						<button type="submit" class="btn btn-primary">提交</button>
+						<button type="reset" class="btn btn-default">重置</button>
+					</div>
+				</div>
+			</form>
+
+			<!-- end -->
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function get_segment() {
+		var content = UE.getEditor('content_script').getContent();
+		var title = $("#title").val();
+		aya_get('<?php echo AYA_URL?>ajax.php?fun=get_segment&title='
+				+ encodeURIComponent(title) + '&content='
+				+ encodeURIComponent(content));
+	}
+
+	function get_note() {
+		var content = UE.getEditor('content_script').getContent();
+		var title = $("#title").val();
+		aya_get('<?php echo AYA_URL?>ajax.php?fun=get_note&title='
+				+ encodeURIComponent(title) + '&content='
+				+ encodeURIComponent(content));
+	}
+
+	if ($.fn.datetimepicker) {
+		$('.form-datetime').datetimepicker({
+			weekStart : 1,
+			todayBtn : 1,
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 2,
+			forceParse : 0,
+			showMeridian : 1,
+			format : 'yyyy-mm-dd hh:ii'
+		});
+	}
+</script>
+{template 'footer'}

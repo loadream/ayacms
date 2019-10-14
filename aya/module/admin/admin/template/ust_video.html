@@ -1,0 +1,68 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side_ust'}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+      <legend>视频</legend>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:">列表</a></li>
+        <li><a href="{AYA_ADMIN_URL}?action=ust_video_a">新建</a></li>
+      </ul>
+      <div class="mt-20"></div>
+ <div class="list">
+          <header>
+            
+            <h3><i class="icon-list-ul icon-border-circle"></i> {$c_name} &nbsp;<small> 共 {$sum} 信息</small></h3>
+          </header>
+          
+          <form class="form-horizontal" role="form" id="{random()}" action="{AYA_ADMIN_URL}?action=ust_video_d"
+	method="post" onsubmit="if(confirm('确定要删除吗?')) aya_post(this.id);return false;">
+    
+          <section class="items items-hover">
+           
+           
+           {loop $items $item}
+<div class="item">
+              <div class="item-heading">
+                <h4>ID:{$item[itemid]} <a href="{$item[url]}">{$item[note]}</a> </h4>
+              </div>
+              <div class="item-content">
+              </div>
+              <div class="item-footer">
+              <input name="posts[ids][]" type="checkbox" value="{$item['itemid']}" />
+                <span class="text-muted"><i class="icon-time"></i> {$item['posttime']}</span>
+                <span class="text-muted"><a href="javascript:void(0)" onclick="if(confirm('确定要删除吗?')) aya_get('?action=ust_video_d&itemid={$item[itemid]}')" style="color:red"><i class="icon-remove"></i></a></span>
+               
+              </div>
+            </div>
+            {/loop}
+           
+          </section>
+          
+          <div class="mt-20"></div>
+          <button type="submit" class="btn btn-danger">删除</button>
+          <button type="button" id="checkall" class="btn btn-default">全选</button>
+          </form>
+           {$pages} 
+        </div>
+        
+     </div>
+  </div>
+</div>
+<script type="text/javascript">
+ $("#checkall").click(function(){
+	if($(this).html()=='全选'){
+		   $("input[name='posts[ids][]']").each(function(){
+     $(this).prop("checked",true);
+   });
+   $(this).html('反选');
+   }else{
+			   $("input[name='posts[ids][]']").each(function(){
+     $(this).prop("checked",false);
+   });
+   $(this).html('全选');	
+		}
+
+   });
+</script>
+{template 'footer'}

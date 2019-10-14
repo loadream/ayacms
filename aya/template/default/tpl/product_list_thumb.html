@@ -1,0 +1,17 @@
+<div class="mt-30"></div>
+{loop $items $item}
+
+<div class="col-md-4 col-sm-6 col-lg-3">
+              <div class="card">
+                <a href="{$item[url]}"><img style="width:100%" src="{get_4x3($item['thumb'])}" alt=""></a>
+                <div class="card-heading">
+                  <a href="{$item[url]}"><strong>{$item[title]}</strong></a>
+                </div>
+                <div class="card-actions" style="font-size:26px">
+                  <i class="icon-yen"></i> {$item['price']}
+                  <span class="text-muted">&nbsp;&nbsp;</span>
+                </div>
+              </div>
+            </div>
+            {/loop}
+           <div class="clearfix"></div>

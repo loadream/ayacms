@@ -1,0 +1,37 @@
+<style>
+.cslist .btn{
+	margin-bottom:5px
+}
+
+</style>
+<?php
+          $css=explode(',',$cs);
+          ?>
+          {loop $CS[0] $_k $_v}
+          <?php 
+          $csarr=$css;
+          $active_all=1;
+          foreach($csarr as $key=>$val){
+          if(isset($CS[$_k][$val])) {
+          unset($csarr[$key]);
+          $active_all=0;
+          }
+          }
+          $_cs=implode(',',$csarr);
+          ?>
+          <div class="row cslist">
+          <div class="col-md-1"><strong>{$_v}</strong></div>
+          <div class="col-md-1"><a class="btn btn-mini {if $active_all}btn-primary{/if}" href="?action=index&channelid={$channelid}&in_module=1&cs={$_cs}&o={$o}">全部</a></div>
+          <div class="col-md-9">
+          {loop $CS[$_k] $k $v}
+          <?php 
+          $active=in_array($k,$css);
+          $csstr=trim($_cs.','.$k,',');
+          ?>
+          <a class="btn btn-mini {if $active}btn-primary{/if}" href="?action=index&channelid={$channelid}&in_module=1&cs={$csstr}&o={$o}" >{html($v)}</a>
+          {/loop}
+          </div>
+          </div>
+          
+          {/loop}
+          <div class="clearfix"></div>

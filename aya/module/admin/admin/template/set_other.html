@@ -1,0 +1,126 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side_set'}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+      <form class="form-horizontal" role="form" id="{random()}" action="{$pca}"
+	method="post" onsubmit="aya_post(this.id);return false;">
+    <legend>其它</legend>
+    
+        <div class="form-group">
+          <label class="col-md-2 control-label">PC端风格</label>
+          <div class="col-md-4">
+            <select class="form-control" name="posts[template_pc]" id="template_pc">
+            {loop $_tpls $k $v}
+            <option value="{$k}" {if $CFG['template_pc']==$k}selected="selected"{/if}>{$v}({$k})</option>
+      {/loop}
+       </select>        
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">触摸设备风格</label>
+          <div class="col-md-4">
+            <select class="form-control" name="posts[template_tc]" id="template_tc">
+            {loop $_tpls $k $v}
+            <option value="{$k}" {if $CFG['template_tc']==$k}selected="selected"{/if}>{$v}({$k})</option>
+      {/loop}
+       </select>        
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">微信风格</label>
+          <div class="col-md-4">
+            <select class="form-control" name="posts[template_wx]" id="template_wx">
+            {loop $_tpls $k $v}
+            <option value="{$k}" {if $CFG['template_wx']==$k}selected="selected"{/if}>{$v}({$k})</option>
+      {/loop}
+       </select>        
+          </div>
+        </div>
+        
+    <div class="form-group">
+          <label class="col-md-2 control-label">URL静态重写</label>
+          <div class="col-md-4">
+            <label class="checkbox-inline"> <input type="checkbox" name="posts[rewrite]" value="1" id="rewrite" {if $rewrite}checked="checked"{/if}>  </label>
+            <div class="help-block">开启此项,增加对搜索引擎的友好度,增加收录量</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">默认注册用户组</label>
+          <div class="col-md-4">
+            <select class="form-control" name="posts[reggroup]" id="reggroup">
+            {loop $GROUP $k $v}
+            {if $k>0}
+            <option value="{$k}" {if $CFG['reggroup']==$k}selected="selected"{/if}>{l($v)}</option>
+      {/if}
+      {/loop}
+       </select>
+            
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label required">时区</label>
+          <div class="col-md-4">
+            
+            <div class="input-group">
+                <input type="text" name="posts[timezone]" id="timezone" value="{$timezone}" class="form-control">
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default dropdown-toggle " data-toggle="dropdown">快捷输入 <span class="caret"></span></button>
+                  
+                  <ul class="dropdown-menu" role="menu">
+                  <?php
+                  for($i=-8;$i<13;$i=$i+2){
+             $zone='Etc/GMT'.($i<0?'':'+').$i;
+                  ?>
+                    <li><a href="javascript:" onclick="$('#timezone').val('{$zone}');">{$zone}</a></li>
+                    <?php
+                    }
+                    ?>
+                  
+                  </ul>
+                </div>
+              </div>
+              
+          </div>
+        </div>
+        
+        
+      <div class="form-group">
+          <label class="col-md-2 control-label required">cookies前缀</label>
+          <div class="col-md-4">
+            <input type="text" name="posts[cookie_pre]" id="cookie_pre" value="{$cookie_pre}" class="form-control">
+             <div class="help-block">更改后,所有用户将重新登陆</div>
+          </div>
+        </div>
+        
+       <div class="form-group">
+          <label class="col-md-2 control-label required">网站秘钥</label>
+          <div class="col-md-4">
+            <input type="text" name="posts[aya_key]" id="aya_key" value="{$aya_key}" class="form-control">
+            <div class="help-block">建议不定期更换</div>
+          </div>
+        </div>  
+        
+        
+        <div class="form-group">
+          <label class="col-md-2 control-label">禁止注册词汇</label>
+          <div class="col-md-4">
+          <textarea class="form-control" rows="3" name="posts[kregword]" id="keywords">{$kregword}</textarea>
+           <div class="help-block">多词汇用","分隔;</div>
+          </div>
+        </div>
+            
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-primary">提交</button>
+          <button type="reset" class="btn btn-default">重置</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	 
+</script> 
+{template 'footer'}

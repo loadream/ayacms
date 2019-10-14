@@ -1,0 +1,54 @@
+{template 'header'}
+<style>
+.level .icon-star{
+	font-size: 16px;
+	color: #F60;
+}
+</style>
+<div class="row">
+  <div class="col-md-2">
+  
+  </div>
+  <div class="col-md-10">
+  {tag 'pathnav'}
+  <div class="mt-20"></div>
+  
+  {if strlen($q)}  
+ <div class="list">
+          <header>
+            <div class="input-group col-md-3 pull-right">
+       
+                <input id="q" type="text" class="form-control" placeholder="请输入关键字" value="{html($q)}">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" onclick="location='?q='+encodeURIComponent($('#q').val());">搜索</button>
+                </span>
+              </div>
+            <h3><i class="icon-list-ul icon-border-circle"></i> {$c_name} &nbsp;<small> 共找到 {$sum} 条信息</small></h3>
+          </header>
+          <section class="items items-hover">
+            {template 'search_list_1'}
+          </section>
+          
+          <div class="mt-20"></div>
+
+           {$pages} 
+        </div>
+        {else}
+        
+        <div class="col-md-3"></div>
+        <div class="input-group col-md-6">
+       
+                <input id="q" type="text" class="form-control" placeholder="请输入关键字" value="{html($q)}">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" onclick="location='?q='+encodeURIComponent($('#q').val());">搜索</button>
+                </span>
+              </div>
+        <div class="col-md-3"></div>
+        <div style="margin-bottom:300px"></div>
+        {/if} 
+  
+  </div>
+</div>
+
+
+{template 'footer'}

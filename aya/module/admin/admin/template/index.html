@@ -1,0 +1,51 @@
+{template 'header'}
+<style>
+.ayacms{
+	
+	font-size: 80px;
+	color: #777;
+	text-align: center;
+	font-style: oblique;
+	background-color: #FFF;
+	width:80%;
+	margin:4% auto 4%;
+	padding: 5% 0px 6%;
+	border: 1px solid #dedede;
+	border-radius:4px
+}
+.ayacms em{
+	font-size: 14px;
+	font-weight: normal;
+	display: block;
+}
+.ayacms .omsg{
+	text-align: left;
+	font-size: 14px;
+	margin:20px auto 0;
+	width:50%;
+	color:#333;
+}
+</style>
+
+<div id="main">
+    <div class="ayacms">AyaCMS <em>VERSION: <?php echo AYA_VERSION?> &nbsp;&nbsp;&nbsp;&nbsp; RELEASE: <?php echo AYA_RELEASE?></em> 
+    
+    <div class="omsg">
+    {$msg['omsg']}
+    </div>
+    </div>
+    <div class="clearfix"></div>
+</div>
+<script type="text/javascript">
+	 
+</script>
+<link href="<?php echo AYA_ADMIN_URL;?>?action=omsg" rel="stylesheet">
+<script type="text/javascript">
+$(function(){
+	<?php if(isset($_GET['upcache'])){?>
+	setTimeout(function(){$(".upcache").trigger("click");}, 100);
+	<?php }?>
+});
+
+</script>
+{template 'footer'}

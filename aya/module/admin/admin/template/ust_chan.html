@@ -1,0 +1,108 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side_ust'}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+      <legend>栏目</legend>
+      <ul class="nav nav-tabs">
+        {loop $LANG $k}
+        <li class="{if $lang==$k}active{/if}"><a href="{$pca}&lang={$k}">{$ALLLANG[$k]}</a></li>
+        {/loop}
+      </ul>
+      <div class="mt-20"></div>
+      <button id="order_0" type="button" class="btn btn-info btn-mini" data-remote="{AYA_ADMIN_URL}?action=ust_chan_o&lang={$lang}&channelid=0" data-toggle="modal"><span class="icon-sort-by-attributes"></span> 排序</button>
+      <button type="button" class="btn btn-primary btn-mini" data-remote="{AYA_ADMIN_URL}?action=ust_chan_a&lang={$lang}" data-toggle="modal"><span class="icon-plus"></span> 新建</button>
+      <div class="mt-5"></div>
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>栏目</th>
+            <th>ID</th>
+            <th>目录</th>
+            <th>模型</th>
+            <th style="width:200px"></th>
+          </tr>
+        </thead>
+        <tbody>
+        
+        {loop $level[0] $k}
+        <tr>
+          <td><a href="{AYA_ADMIN_URL}?action=ust_chan_e&lang={$lang}&channelid={$k}" data-toggle="modal"><span class="icon-angle-right"> </span>{$CHANNELS[$k]['name']}</a>{if $level[$k]}
+            <button type="button" class="btn btn-info btn-mini" data-remote="{AYA_ADMIN_URL}?action=ust_chan_o&lang={$lang}&channelid={$k}&in_modal=1" data-toggle="modal"><span class="icon-sort-by-attributes"></span>排序</button>
+            {/if} 
+            {if $CHANNELS[$k]['hide_pc']}
+            <span class="label label-badge">P</span>
+            {/if}
+            {if $CHANNELS[$k]['hide_tc']}
+            <span class="label label-badge">T</span>
+            {/if}
+            {if $CHANNELS[$k]['hide_wx']}
+            <span class="label label-badge">W</span>
+            {/if}
+            </td>
+          <td>{$CHANNELS[$k]['channelid']}</td>
+          <td>{$CHANNELS[$k]['dirname']}</td>
+          <td>{$CHANNELS[$k]['module']}</td>
+          <td><button type="button" class="btn btn-default btn-mini" onclick="if(confirm('确定要删除吗?')) aya_get('{AYA_ADMIN_URL}?action=ust_chan_d&lang={$lang}&channelid={$k}')"><span class="icon-remove"></span></button>
+            &nbsp;&nbsp;&nbsp;
+            <a class="btn btn-default btn-mini" href="{if $CHANNELS[$k]['module']!='anull'}{AYA_URL}{/if}{$CHANNELS[$k]['path']}" target="_admin"><span class="icon-external-link"></span> 预览</a>
+            <a class="btn btn-success btn-mini" href="{AYA_ADMIN_URL}?action=index&channelid={$k}&in_module=1"><span class="icon-cog"></span> 管理</a>
+            </td>
+        </tr>
+        {loop $level[$k] $k}
+        <tr>
+          <td><a style="margin-left:1em" href="{AYA_ADMIN_URL}?action=ust_chan_e&lang={$lang}&channelid={$k}" data-toggle="modal"><span class="icon-angle-right"> </span>{$CHANNELS[$k]['name']}</a> 
+          {if $CHANNELS[$k]['hide_pc']}
+            <span class="label label-badge">P</span>
+            {/if}
+            {if $CHANNELS[$k]['hide_tc']}
+            <span class="label label-badge">T</span>
+            {/if}
+            {if $CHANNELS[$k]['hide_wx']}
+            <span class="label label-badge">W</span>
+            {/if}
+          </td>
+          <td>{$CHANNELS[$k]['channelid']}</td>
+          <td>{$CHANNELS[$k]['dirname']}</td>
+          <td>{$CHANNELS[$k]['module']}</td>
+          <td><button type="button" class="btn btn-default btn-mini" onclick="if(confirm('确定要删除吗?')) aya_get('{AYA_ADMIN_URL}?action=ust_chan_d&lang={$lang}&channelid={$k}')"><span class="icon-remove"></span></button>
+            &nbsp;&nbsp;&nbsp;
+            <a class="btn btn-default btn-mini" href="{if $CHANNELS[$k]['module']!='anull'}{AYA_URL}{/if}{$CHANNELS[$k]['path']}" target="_admin"><span class="icon-external-link"></span> 预览</a>
+            <a class="btn btn-success btn-mini" href="{AYA_ADMIN_URL}?action=index&channelid={$k}&in_module=1"><span class="icon-cog"></span> 管理</a>
+             </td>
+        </tr>
+        {/loop}             
+        
+        
+        
+        {/loop}
+          </tbody>
+        
+      </table>
+      <div class="help-block">
+      <span class="label label-badge">P</span>
+           电脑隐藏;
+            <span class="label label-badge">T</span>
+            触摸设备隐藏;
+            <span class="label label-badge">W</span>
+      微信隐藏;
+      
+      </div> 
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	
+	//$("#aaa").trigger("click"); 
+	
+	
+	
+	//$('#triggerModal').on('hidden.bs.modal', function (e) {  
+  //window.location.reload(true);  
+ // alert(9);
+//}) 
+	
+		});
+</script> 
+{template 'footer'}

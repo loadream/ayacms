@@ -1,0 +1,63 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side',$c_module}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+      <legend>信息&nbsp;&nbsp;<small>[{$ALLLANG[$CHANNEL['language']]}] {$CHANNEL['name']}</small></legend>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:">列表</a></li>
+        <li><a href="{AYA_ADMIN_URL}?action=add&channelid={$channelid}&in_module=1">新建</a></li>
+      </ul>
+      <div class="mt-20"></div>
+      <div class="list">
+        <header>
+          <h3><i class="icon-list-ul icon-border-circle"></i> {$c_name} &nbsp;<small> 共 {$sum} 信息</small></h3>
+        </header>
+        <form class="form-horizontal" role="form" id="{random()}" action="{AYA_ADMIN_URL}?action=ust_video_d"
+	method="post" onsubmit="if(confirm('确定要删除吗?')) aya_post(this.id);return false;">
+          <table class="table table-condensed">
+            <thead>
+              <tr>
+                <th style="width: 40px"> </th>
+                <th>ID</th>
+                <th>用户名</th>
+                <th>用户组</th>
+                <th>性别</th>
+                <th>邮箱</th>
+                <th>注册时间</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+            
+            {loop $items $item}
+            <tr>
+              <td><input name="ids" type="checkbox" value="{$item[itemid]}" /></td>
+              <td>{$item[itemid]}</td>
+              <td><a href="{$item[url]}">{$item[name]}</a></td>
+              <td>{l($item[group])}</td>
+              <td>{$item[sex]}</td>
+              <td>{$item[email]}</td>
+              <td>{$item[regtime]}</td>
+              <td><button type="button" class="btn btn-default btn-mini" onclick="if(confirm('确定要删除吗?')) aya_get('?action=del&channelid={$channelid}&in_module=1&itemid={$item[itemid]}')"><span class="icon-remove"></span> </button></td>
+            </tr>
+            {/loop}
+              </tbody>
+            
+          </table>
+          </section>
+          <div class="mt-20"></div>
+          <div class="help-block"> 信息的创建与删除,将同步所有同模型的栏目. </div>
+          <button type="submit" class="btn btn-danger">删除</button>
+          <button type="button" id="checkall" class="btn btn-default">全选</button>
+        </form>
+        {$pages} </div>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	
+});
+</script> 
+{template 'footer'}

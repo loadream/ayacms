@@ -1,0 +1,13 @@
+<div class="mt-30"></div>
+{loop $items $item}
+
+<div class="col-md-4 col-sm-6 col-lg-3">
+              <div class="card">
+                <a href="{$item[url]}"><img style="width:100%" src="{get_4x3($item['thumb'])}" alt=""></a>
+                <div class="card-heading">
+                  <i class="icon-expand" style="font-size:200%"></i> <a href="{$item[url]}"><strong>{$item[title]}</strong></a>
+                </div>
+              </div>
+            </div>
+            {/loop}
+           <div class="clearfix"></div>

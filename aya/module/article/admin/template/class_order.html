@@ -1,0 +1,81 @@
+{if $in_sub}
+<style>
+.board-item{
+	min-width:50px;
+	float: left;
+}
+.board{
+	width:auto;
+	float:none;
+}
+.board-item {
+padding: 0 0 0 10px;
+margin: 5px;
+background: #fff;
+border: 1px solid #ddd;
+cursor: pointer;
+}
+</style>
+{else}
+<style>
+.board-item {
+cursor: pointer;
+}
+</style>
+{/if}
+<form class="form-horizontal" role="form" id="{random()}" action="{$pca}{if $in_sub}&itemid={$itemid}&in_sub=1{/if}"
+	method="post" onsubmit="aya_post(this.id);return false;">
+    
+        <div class="form-group">
+          <label class="col-md-2 control-label">项目名称</label>
+          <div class="col-md-10">
+            
+        <div class="boards">
+          <div class="board panel">
+            
+            <div class="panel-body">
+              <div class="board-list">
+                {loop $items $id $name}
+                <div class="board-item">
+                <input name="posts[ids][]" type="hidden" value="{$id}" />
+                  {$name}
+                </div>
+                {/loop}
+              </div>
+            </div>
+          </div>
+          
+          
+        </div>
+            
+         <div class="help-block">拖拽以排序</div>   
+            
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="提交">
+            <button type="button" class="btn btn-default" onclick="_cz()">重置</button>
+          </div>
+        </div>
+      </form>
+
+<div class="clearfix"></div>
+<script type="text/javascript">
+
+function _cz(){
+	$(".modal-header .close").trigger("click");
+	setTimeout(function(){$("#order_{$itemid}").trigger("click");}, 500);
+}
+
+
+$(function(){
+	 $('.boards').boards();
+	 });
+	 
+</script>
+
+
+
+

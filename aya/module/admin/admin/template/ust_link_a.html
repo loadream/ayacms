@@ -1,0 +1,84 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side_ust'}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+      <legend>链接</legend>
+    <ul class="nav nav-tabs">
+        <li><a href="{AYA_ADMIN_URL}?action=ust_link">列表</a></li>
+        <li class="active"><a href="javascript:">新建</a></li>
+      </ul>
+      <div class="mt-20"></div>
+      
+      <form class="form-horizontal" role="form" id="form1" action="{$pca}"
+	method="post" onsubmit="aya_post(this.id);return false;">
+    
+    <div class="form-group">
+        <label class="col-md-1 control-label required">备注</label>
+        <div class="col-md-6">
+       
+          <input type="text" name="posts[note]" id="note" value="" class="form-control">
+        </div>
+      </div>
+    
+    <?php for($i=0;$i<20;$i++){?>
+        
+         <div class="form-group">
+          <label class="col-md-1 control-label">链接({$i+1})</label>
+          <div class="col-md-6">
+          
+          标题:
+          <input type="text" name="posts[title_{$i}]" value="" class="form-control">
+          外链:
+          <input type="text" name="posts[openlink_{$i}]" value="" class="form-control">
+          简介:
+          <textarea class="form-control" rows="3" name="posts[content_{$i}]" id="code"></textarea>
+          
+          </div>
+        </div>
+        <div class="form-group">
+        <label class="col-md-1 control-label"></label>
+        <div class="col-md-11">
+       缩略图
+{set_upload('posts[url_'.$i.']',AYA_URL.'ajax.php?fun=upload_thumb','1')}
+
+        </div>
+      </div> 
+       
+       <?php if($i==9){?>
+       <button id="openlist" class="btn btn-mini " type="button"><span class="caret"></span> 11-20</button>
+       <?php }?>
+       
+        <?php }?>
+        
+        <div class="form-group">
+          <div class="col-md-offset-1 col-md-11">
+          <div class="help-block">标题为空,则此项不被保存</div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="col-md-offset-1 col-md-11">
+            <input type="submit" class="btn btn-primary" value="提交" />
+            <input type="reset" class="btn btn-default" value="重置" />
+          </div>
+        </div>
+      </form>
+
+<div class="clearfix"></div>
+<script type="text/javascript">
+$("#note").focus();
+</script> 
+      
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$('#form1 div.form-group:gt(20):lt(20)').hide();
+ 	$('#openlist').click(function() {
+ 		$('#form1 div.form-group:gt(20):lt(20)').toggle();
+ 	});
+		});
+</script> 
+{template 'footer'}

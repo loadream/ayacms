@@ -1,0 +1,90 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side_set'}</div>
+<div class="main_box_w">
+	<div id="main_box" class="main_box">
+		<div class="col-md-12">
+			<legend>系统信息</legend>
+			<form>
+				<div class="form-group">
+					<label class="control-label">系统版本号</label>
+					<div class="help-block">
+						AyaCMS
+						<?php echo AYA_VERSION ?>
+						(
+						<?php echo AYA_RELEASE ?>
+						)
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">服务器当前时间</label>
+					<div class="help-block">
+						<?php echo $info[0]?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">服务器操作系统</label>
+					<div class="help-block">
+						<?php echo $info[1]?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">服务器解译引擎</label>
+					<div class="help-block">
+						<?php echo $info[2]?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">PHP版本</label>
+					<div class="help-block">
+						<?php echo $info[3]?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">PHP运行方式</label>
+					<div class="help-block">
+						<?php echo $info[4]?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">Mysql版本</label>
+					<div class="help-block">
+						<?php echo $info[5]?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">磁盘剩余空间</label>
+					<div class="help-block">
+						<?php echo $info[6]?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">程序最多使用的内存量</label>
+					<div class="help-block">
+						<?php echo $info[7]?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">POST最大字节数</label>
+					<div class="help-block">
+						<?php echo $info[8]?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">允许最大上传文件</label>
+					<div class="help-block">
+						<?php echo $info[9]?>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label">程序最长运行时间</label>
+					<div class="help-block">
+						<?php echo $info[10]?>
+						s
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>
+{template 'footer'}

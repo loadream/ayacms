@@ -1,0 +1,89 @@
+{template 'header'}
+<style>
+
+</style>
+<div class="row">
+  <div class="col-md-2">
+  <diy></diy>
+  </div>
+  <div class="col-md-10">
+  
+  {tag 'pathnav'}
+  
+      <legend>{$c_name}</legend>
+    
+      <div class="mt-20"></div>
+      
+      <form class="form-horizontal" role="form" id="{random()}" action=""
+	method="post" onsubmit="aya_post(this.id);return false;">
+    
+    <div class="form-group">
+        <label class="col-md-2 control-label required">{l('标题')}</label>
+        <div class="col-md-8">
+          <input type="text" name="posts[title]" id="title" value="" class="form-control">
+        </div>
+      </div>
+    <div class="form-group">
+        <label class="col-md-2 control-label required">{l('您的称呼')}</label>
+        <div class="col-md-4">
+          <input type="text" name="posts[name]" id="name" value="" class="form-control">
+        </div>
+      </div>    
+       <div class="form-group">
+        <label class="col-md-2 control-label">Email</label>
+        <div class="col-md-4">
+          <input type="text" name="posts[email]" id="email" value="" class="form-control">
+        </div>
+      </div>       
+            <div class="form-group">
+        <label class="col-md-2 control-label">{l('手机')}</label>
+        <div class="col-md-4">
+          <input type="text" name="posts[tel]" id="tel" value="" class="form-control">
+        </div>
+      </div>
+      
+        {fields_edit()}
+         <div class="form-group">
+          <label class="col-md-2 control-label required">{l('内容')}</label>
+          <div class="col-md-8">
+          <textarea class="form-control" rows="8" name="posts[content]" id="content"></textarea>
+          
+          </div>
+        </div>
+        
+        <div class="form-group">
+        <label class="col-md-2 control-label required">{l('验证码')}</label>
+        <div class="col-md-4">
+         <input type="text"  id="checkcode" name="posts[checkcode]" class="form-control" placeholder="{l('请输入验证码')}" />
+         <div class="help-block">
+<a href="javascript:checkcode()"><img src="{AYA_URL}checkcode.php" id="_checkcode"/></a>
+</div>
+        </div>
+        
+      </div>
+        
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="{l('提交')}" />
+            <input type="reset" class="btn btn-default" value="{l('重置')}" />
+          </div>
+        </div>
+      </form>
+
+<div class="clearfix"></div>
+<script type="text/javascript">
+
+function checkcode(){
+$('#_checkcode').attr('src','{AYA_URL}checkcode.php?'+Math.random());
+$("#checkcode").focus();
+}
+$("#title").focus();
+</script> 
+      
+
+  
+  </div>
+</div>
+
+
+{template 'footer'}

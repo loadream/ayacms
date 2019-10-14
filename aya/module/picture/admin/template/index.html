@@ -1,0 +1,110 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side',$c_module}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+      <legend>信息&nbsp;&nbsp;<small>[{$ALLLANG[$CHANNEL['language']]}] {$CHANNEL['name']}</small></legend>
+    <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:">列表</a></li>
+        <li><a href="{AYA_ADMIN_URL}?action=add&channelid={$channelid}&in_module=1">新建</a></li>
+        <div class="input-group col-md-3 pull-right">
+       
+                <input id="q" type="text" class="form-control" placeholder="请输入关键字" value="{html($q)}">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" onclick="location='?action=index&channelid={$channelid}&in_module=1&q='+encodeURIComponent($('#q').val());">搜索</button>
+                </span>
+              </div>
+      </ul>
+      <div class="mt-20"></div>
+ <div class="list">
+          <header>
+          {template 'cs_1'}
+            <div class="pull-right">
+            
+            <div class="btn-group">
+                <button class="btn btn-inverse dropdown-toggle" data-toggle="dropdown">
+                <?php if($o=='posttime'){
+                ?>
+                 <i class="icon-time"></i> 发表时间 <span class="caret"></span></button>
+                <?php
+                }elseif($o=='hits'){
+                ?>
+                <i class="icon-eye-open"></i> 人气 <span class="caret"></span></button>
+                <?php
+                }elseif($o=='level'){
+                ?>
+                <i class="icon-star"></i> 推荐度 <span class="caret"></span></button>
+                <?php
+                }else{?>
+                <i class="icon-th-list"></i> 默认排序 <span class="caret"></span></button>
+                <?php
+                }?>
+                
+                <ul class="dropdown-menu">
+                <li><a href="?action=index&channelid={$channelid}&in_module=1&o="><i class="icon-th-list"></i> 默认排序</a></li>
+                  <li><a href="?action=index&channelid={$channelid}&in_module=1&o=posttime"><i class="icon-time"></i> 发表时间</a></li>
+                  <li><a href="?action=index&channelid={$channelid}&in_module=1&o=hits"><i class="icon-eye-open"></i> 人气 </a></li>
+                  <li><a href="?action=index&channelid={$channelid}&in_module=1&o=level"><i class="icon-star"></i> 推荐度 </a></li>
+                </ul>
+              </div>
+           {if 0}
+              <div class="btn-group" data-toggle="buttons-radio">
+                <button type="button" class="btn btn-default btn-small"><i class="icon-reorder"></i></button>
+                <button type="button" class="btn btn-default btn-small active"><i class="icon-th-list"></i></button>
+                <button type="button" class="btn btn-default btn-small"><i class="icon-th"></i></button>
+                <button type="button" class="btn btn-default btn-small"><i class="icon-th-large"></i></button>
+              </div> {/if}
+            </div>
+            <h3><i class="icon-list-ul icon-border-circle"></i> {$c_name} &nbsp;<small> 共 {$sum} 文章</small></h3>
+          </header>
+          
+          <form class="form-horizontal" role="form" id="{random()}" action="{AYA_ADMIN_URL}?action=del&channelid={$channelid}&in_module=1"
+	method="post" onsubmit="if(confirm('确定要删除吗?')) aya_post(this.id);return false;">
+    
+          <section class="items items-hover">
+            {template 'item_list_2'}
+          </section>
+          
+          <div class="mt-20"></div>
+          <button type="submit" class="btn btn-danger">删除</button>
+          <button type="button" id="item_move" class="btn btn-primary">移动</button>
+          <button type="button" id="checkall" class="btn btn-default">全选</button>
+          </form>
+           {$pages} 
+        </div>
+        
+     </div>
+  </div>
+</div>
+<script type="text/javascript">
+$("#item_move").click(function(){
+	var chk_value =[]; 
+	$("input[name='posts[ids][]']:checked").each(function(){ 
+	chk_value.push($(this).val()); 
+	}); 
+	
+	if(chk_value.length==0) {
+		$.messager.show('至少选择一项', {type: 'warning',time: 3000,placement: 'top'});	
+		return;
+	}
+	var ids=chk_value.toString();
+	(new ModalTrigger({title: '移动',remote:'{AYA_ADMIN_URL}?action=move&channelid={$channelid}&ids='+ids+'&in_module=1&in_ajax=1'})).show();
+
+   });
+$("#checkall").click(function(){
+	if($(this).html()=='全选'){
+		   $("input[name='posts[ids][]']").each(function(){
+     $(this).prop("checked",true);
+   });
+   $(this).html('反选');
+   }else{
+			   $("input[name='posts[ids][]']").each(function(){
+     $(this).prop("checked",false);
+   });
+   $(this).html('全选');	
+		}
+
+   });
+
+</script> 
+{template 'footer'}

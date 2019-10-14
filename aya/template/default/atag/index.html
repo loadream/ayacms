@@ -1,0 +1,28 @@
+{template 'header'}
+<style>
+
+</style>
+<div class="row">
+  <div class="col-md-2">
+  
+  </div>
+  <div class="col-md-10">
+  {tag 'pathnav'}
+  <div class="mt-20"></div>
+  
+ 
+ <div class="list">
+<div class="mt-20"></div>
+{loop $tags $tag $num}
+{php $url=url($c_path,'show.php','tag='.urlencode($tag));}
+<a class="label" href="{$url}">{html($tag)} <span class="label label-badge label-primary">{$num}</span></a>
+
+{/loop}
+</div>
+
+  
+  </div>
+</div>
+
+
+{template 'footer'}

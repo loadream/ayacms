@@ -1,0 +1,44 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side',$c_module}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+      <legend>评论&nbsp;&nbsp;<small>[{$ALLLANG[$CHANNEL['language']]}] {$CHANNEL['name']}</small></legend>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:">列表</a></li>
+      </ul>
+      <div class="mt-20"></div>
+      
+      <form class="form-horizontal" role="form" id="{random()}" action="{AYA_ADMIN_URL}?action=comment_del&channelid={$channelid}&in_module=1"
+	method="post" onsubmit="if(confirm('确定要删除吗?')) aya_post(this.id);return false;">
+
+   {template 'comment_list'}
+            <button type="submit" class="btn btn-danger">删除</button>
+            <button type="button" id="checkall" class="btn btn-default">全选</button>
+            {$pages} 
+            
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+
+
+
+$("#checkall").click(function(){
+	if($(this).html()=='全选'){
+		   $("input[name='posts[ids][]']").each(function(){
+     $(this).prop("checked",true);
+   });
+   $(this).html('反选');
+   }else{
+			   $("input[name='posts[ids][]']").each(function(){
+     $(this).prop("checked",false);
+   });
+   $(this).html('全选');	
+		}
+
+   });
+
+</script> 
+{template 'footer'}

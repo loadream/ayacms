@@ -1,0 +1,177 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side',$c_module}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+      <legend>表单&nbsp;&nbsp;<small>[{$ALLLANG[$CHANNEL['language']]}] {$CHANNEL['name']}</small></legend>
+      <ul class="nav nav-tabs">
+        <li><a href="{AYA_ADMIN_URL}?action=field&channelid={$channelid}&in_module=1">列表</a></li><li class="active"><a href="javascript:">编辑</a></li>
+      </ul>
+      <div class="mt-20"></div>
+      <form class="form-horizontal" id="{random()}" action="{$pca}&name={$name}"
+	method="post" autocomplete="off"
+	onsubmit="aya_post(this.id);return false;">
+    
+      <div class="form-group">
+        <label class="col-md-1 control-label required">字段</label>
+        <div class="col-md-3">
+          <input type="text" name="posts[name]" id="name" value="{$name}" class="form-control" >
+          <div class="help-block">只允许字母数字下划线,首字符不能为数字</div>
+        </div>
+        <div class="col-md-1">
+          <button type="button" class="btn btn-default" onclick="$('#name').val(randomstring(5))">随机</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-1 control-label required">标题</label>
+        <div class="col-md-3">
+          <input type="text" name="posts[title]" id="title" value="{$title}" class="form-control">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="col-md-1 control-label required">表单类型</label>
+        <div class="col-md-3">
+          <select class="form-control" onchange="set_hide(this.value);" name="posts[html]" id="html">
+            {loop $ADDFIELD $k $v}
+            <option value="{$k}" {if $html==$k}selected="selected"{/if}>{$v}</option>
+      {/loop}
+       </select>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="col-md-1 control-label required">最少输入范围</label>
+        <div class="col-md-6">
+          <input type="text" name="posts[vmin]" id="vmin" value="{$vmin}" class="form-control">
+          <div class="help-block">多选框表示最少选择数量;数字框金额表示最小允许的值;文本框(域)表示最少字符数;上传为最少文件数</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-1 control-label required">最多输入范围</label>
+        <div class="col-md-6">
+          <input type="text" name="posts[vmax]" id="vmax" value="{$vmax}" class="form-control">
+          <div class="help-block">多选框表示最多选择数量;数字金额表示最大允许的值;文本框(域)表示最多字符数;上传为最多文件数</div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="col-md-1 control-label">帮助提示</label>
+        <div class="col-md-6">
+          <input type="text" name="posts[note]" id="note" value="{$note}" class="form-control">
+        </div>
+      </div>
+       <div class="form-group">
+        <label class="col-md-1 control-label">必选/必填</label>
+        <div class="col-md-6">
+        <label class="checkbox-inline"> <input type="checkbox" name="posts[input_limit]" value="1" id="input_limit" {if $input_limit}checked="checked"{/if}>  </label>
+        
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="col-md-1 control-label required">选项值</label>
+        <div class="col-md-6">
+        <textarea  name="posts[option_value]" rows="6" class="form-control" id="option_value" >{$option_value}</textarea>
+         <div class="help-block">每行一个;键值和名称用","分隔;如: tel,电话</div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label class="col-md-1 control-label">缺省值</label>
+        <div class="col-md-6">
+          <input type="text" name="posts[default_value]" id="default_value " value="{$default_value}" class="form-control">
+          <div class="help-block">多选项目缺省值,用","分隔</div>
+        </div>
+      </div>
+            <div class="form-group">
+        <label class="col-md-1 control-label">使用界面交互</label>
+        <div class="col-md-6">
+        <label class="checkbox-inline"> <input name="posts[display]" type="checkbox" id="display" value="1" {if $display}checked="checked"{/if}>  </label>
+        <div class="help-block">取消此选项,在编辑页面不会出现该表单项目,提交时也不做该表单的更新处理.</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-1 control-label">前台呈现样式</label>
+        <div class="col-md-6">
+        <label class="checkbox-inline"> <input name="posts[front]" type="checkbox" id="front" value="1" {if $front}checked="checked"{/if}>  </label>
+        <div class="help-block">取消此选项,在前台模板中不显示该表单.可以通过标签手动添加</div>
+        </div>
+      </div>
+      
+       <div class="form-group">
+        <label class="col-md-1 control-label">附加代码</label>
+        <div class="col-md-6">
+        <textarea  name="posts[addition]" rows="3" class="form-control" id="addition" >{$addition}</textarea>
+         <div class="help-block">在表单中,加入功能代码</div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-md-offset-1 col-md-11">
+        <button type="submit" class="btn btn-primary">提交</button>
+          <button type="reset" class="btn btn-default">重置</button>
+        </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+function set_hide(type){
+	var arr =[];
+	arr['text']=[7,];
+	arr['textarea']=[7,8];
+	arr['int']=[7];
+	arr['float']=[7];
+	arr['select']=[3,4];
+	arr['radio']=[3,4];
+	arr['checkbox']=[];
+	arr['hidden']=[3,4,5,6,7];
+	arr['thumb']=[3,7];
+	arr['file']=[3,7];
+	arr['editor']=[7,8];
+	arr['date']=[7];
+	var h=arr[type];
+	$('.form-group').show();
+	for(k in h) 
+{ 
+	$('.form-group:eq('+h[k]+')').hide();
+}
+	
+}
+
+set_hide('{$html}');
+
+function randomstring(length) {
+	
+    var chars = 'abcdefghiklmnopqrstuvwxyz';
+    var str = '';
+    for (var i = 0; i < length; i++) {
+        str += chars[Math.floor(Math.random() * chars.length)];
+    }
+    return str;
+}
+
+
+
+
+$("#checkall").click(function(){
+	if($(this).html()=='全选'){
+		   $("input[name='posts[ids][]']").each(function(){
+     $(this).prop("checked",true);
+   });
+   $(this).html('反选');
+   }else{
+			   $("input[name='posts[ids][]']").each(function(){
+     $(this).prop("checked",false);
+   });
+   $(this).html('全选');	
+		}
+
+   });
+
+</script> 
+{template 'footer'}

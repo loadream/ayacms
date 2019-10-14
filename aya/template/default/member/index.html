@@ -1,0 +1,70 @@
+{template 'header'}
+
+<div class="row">
+  <div class="col-md-2">
+  {tag 'member_sidebar'}
+  
+  </div>
+  <div class="col-md-10">
+  
+  
+  <form class="form-horizontal">
+      <legend>{l('个人信息')}</legend>
+      <div class="form-group">
+        <label class="col-md-2 control-label">{l('用户名')}</label>
+        <div class="col-md-4">
+         <p class="form-control-static">{$name}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">Email</label>
+        <div class="col-md-4">
+         <p class="form-control-static">{$email}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">{l('性别')}</label>
+        <div class="col-md-4">
+         <p class="form-control-static">{$sex}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">{l('发表数量')}</label>
+        <div class="col-md-4">
+         <p class="form-control-static">{$post_sum}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">{l('注册时间')}</label>
+        <div class="col-md-4">
+         <p class="form-control-static">{$regtime}</p>
+        </div>
+      </div>
+      <hr />
+      <div class="form-group">
+        <label class="col-md-2 control-label">{l('aya_a')}</label>
+        <div class="col-md-4">
+         <p class="form-control-static">{$aya_a}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">{l('aya_b')}</label>
+        <div class="col-md-4">
+         <p class="form-control-static">{$aya_b}</p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">{l('aya_c')}</label>
+        <div class="col-md-4">
+         <p class="form-control-static">{$aya_c}</p>
+        </div>
+      </div>
+      <hr />
+      {fields_show()}
+      
+    </form>
+  
+  </div>
+</div>
+
+{template 'footer'}

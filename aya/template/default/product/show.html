@@ -1,0 +1,206 @@
+{template 'header'}
+<script type="text/javascript" src="{AYA_TURL}aya/royalslider/js/jquery.royalslider.min.js?v=9.3.6"></script>
+<link rel="stylesheet" type="text/css" href="{AYA_TURL}aya/royalslider/css/royalslider.css" />
+<style>
+.level .icon-star{
+	font-size: 16px;
+}
+.zoom{
+	
+}
+ #gallery-1 {
+  width: 100%;
+  -webkit-user-select: none;
+  -moz-user-select: none;  
+  user-select: none;
+  padding-bottom:4px;
+}
+</style>
+
+ 
+<div class="row">
+  <div class="col-md-2"><diy>
+<diyitem>{diy 'product_thumb','channelid=$channelid&line=4&number=1&page=1'}</diyitem></diy></div>
+  <div class="col-md-10"> {tag 'pathnav'}
+  <div class="mt-20"></div>
+  <h1 style="margin-top:0" >{$title}</h1> 
+  <div class="mt-20"></div>
+ <div class="row">
+ {if $pics}
+  <div class="col-md-5">
+  
+ <div id="gallery-1" class="royalSlider rsDefault">
+ {php $k=0;}
+{loop $pics $pic $_title}
+    <a class="rsImg {if $k++<1}bugaga{/if}" data-rsw="1000" data-rsh="1000"  data-rsBigImg="{AYA_URL}aya/upload/{get_4x4($pic)}" href="{AYA_URL}aya/upload/{get_4x4($pic)}"><img width="50" height="50" class="rsTmb" src="{AYA_URL}aya/upload/{get_4x3($pic)}" title="{$_title}"/></a>
+{/loop}
+  </div>
+  
+    </div>
+    {/if}
+  <div class="col-md-7 {if !$pics}col-md-12{/if}">
+  
+  <div class="article" style="padding-top:0">
+      <header>
+      
+        <dl class="dl-inline">
+          <dt>{l('查看')}: </dt>
+          <dd>{$hits}</dd>
+          <dt></dt>
+          <dd class="pull-right level text-primary">{if $new} <span class="label label-success">{l('新')}</span> {/if} {if $level} <span class="label label-info">{l('推荐')}</span> {/if}</dd>
+        </dl>
+        
+      </header>
+      <div class="mt-20"></div>
+      <form class="form-horizontal">
+      <div class="form-group">
+          <label class="col-md-2 control-label">{l('价格')}</label>
+          <div class="col-md-10"><p class="form-control-static">{$price}</div>
+        </div>
+	{fields_show()}
+  </form>
+  <div class="mt-30"></div>
+  <button onclick="$('#email_Modal').modal();" class="btn btn-lg btn-primary pull-right">{l('立即订购')}</button>
+  <div class="clearfix"></div>
+    </div> 
+    
+  </div>
+</div>
+
+  <div class="article">
+   <section class="article-content">{dhtml($content)} </section>
+   <diy>
+<diyitem>{diy 'share_baidu','size=24&align=right'}</diyitem></diy>
+      <footer>
+        <p class="pull-right text-muted"> {l('查看')}：{$hits} </p>
+        <p class="text-important">{if $tag}tags:{else}&nbsp;{/if} 
+          {loop $tag $k $v} <span class="label"><a href="{$v['url']}">{$v['name']}</a></span> {/loop}</p>
+        <ul class="pager pager-justify">
+          <li class="previous {$previous[class]}"><a href="{$previous[url]}"><i class="icon-arrow-left"></i> {$previous[title]}</a></li>
+          <li><a href="{AYA_URL}{$c_dirname}/"><i class="icon-list-ul"></i> {l('目录')}</a></li>
+          <li class="next {$next[class]}"><a href="{$next[url]}">{$next[title]} <i class="icon-arrow-right"></i></a></li>
+        </ul>
+      </footer>
+  </div>
+
+{template 'comment'}
+</div>
+</div>
+<div class="modal fade" id="email_Modal">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">
+					<span aria-hidden="true">×</span><span class="sr-only">关闭</span>
+				</button>
+				<h4 class="modal-title">{l('产品订购')}</h4>
+			</div>
+			<div class="modal-body">
+
+				<form class="form-horizontal" role="form" id="<?php echo random()?>"
+					action="<?php echo AYA_URL?>ajax.php?fun=send_email&type=chanpingdinggou" method="post"
+					onsubmit="aya_post(this.id);return false;">
+					<div class="form-group">
+          <label class="col-md-2 control-label required">标题</label>
+          <div class="col-md-10">
+            <input type="text" name="posts[title]" id="dg_title" value="{l('订购')}:{$title}" class="form-control">
+            <div class="help-block"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label">{l('订购数量')}</label>
+          <div class="col-md-5">
+            <input type="text" name="posts[number]" id="dg_number" value="" class="form-control">
+            <div class="help-block"></div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label required">{l('您的称谓')}</label>
+          <div class="col-md-5">
+            <input type="text" name="posts[name]" id="dg_name" value="" class="form-control">
+            <div class="help-block"></div>
+          </div>
+        </div>
+
+<div class="form-group">
+          <label class="col-md-2 control-label required">{l('联系方式')}</label>
+          <div class="col-md-10">
+            <input type="text" name="posts[info]" id="dg_info" value="" class="form-control">
+            <div class="help-block">{l('我们会通过此方式联系您')}</div>
+          </div>
+        </div>
+        
+ <div class="form-group">
+          <label class="col-md-2 control-label">{l('其它')}</label>
+          <div class="col-md-10">
+          
+          <textarea class="form-control" rows="3" name="posts[other]" ></textarea>
+          <div class="help-block">{l('小于%s字','200')}</div>
+          </div>
+        </div>
+                
+        <div class="form-group">
+        <label class="col-md-2 control-label required">{l('验证码')}</label>
+        <div class="col-md-4">
+         <input type="text"  id="dgcheckcode" name="posts[checkcode]" class="form-control" placeholder="{l('请输入验证码')}" />
+         <div class="help-block">
+<a href="javascript:dg_checkcode()"><img src="{AYA_URL}checkcode.php" id="dg_checkcode"/></a>
+</div>
+        </div>
+        
+      </div>      
+        
+					<div class="form-group">
+						<div class="col-md-offset-2 col-md-10">
+							<button type="submit" class="btn btn-primary">{l('提交')}</button>
+							<button type="reset" class="btn btn-default">{l('重置')}</button>
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+  jQuery(document).ready(function($) {
+  $('#gallery-1').royalSlider({
+    fullscreen: {
+      enabled: true,
+      nativeFS: true
+    },
+    controlNavigation: 'thumbnails',
+    autoScaleSlider: true, 
+    autoScaleSliderWidth: 550,     
+    autoScaleSliderHeight: 550,
+    loop: false,
+    imageScaleMode: 'fit-if-smaller',
+    navigateByClick: true,
+    numImagesToPreload:2,
+    arrowsNav:true,
+    arrowsNavAutoHide: true,
+    arrowsNavHideOnTouch: true,
+    keyboardNavEnabled: true,
+    fadeinLoadedSlide: true,
+    globalCaption: true,
+    globalCaptionInside: false,
+	//imgWidth: 1400,
+    //imgHeight: 1000,
+    thumbs: {
+      appendSpan: true,
+      firstMargin: true,
+      paddingBottom: 4,
+	  
+    }
+  });
+});
+
+  function dg_checkcode(){
+  $('#dg_checkcode').attr('src','{AYA_URL}checkcode.php?'+Math.random());
+  $("#dgcheckcode").focus();
+  }
+
+		</script>
+{template 'footer'}

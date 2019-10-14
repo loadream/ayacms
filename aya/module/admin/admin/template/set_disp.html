@@ -1,0 +1,66 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side_set'}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+      <form class="form-horizontal" role="form" id="{random()}" action="{$pca}"
+	method="post" onsubmit="aya_post(this.id);return false;">
+    <legend>偏好</legend>
+    
+        <div class="form-group">
+          <label class="col-md-2 control-label required">标记"新"时限</label>
+          <div class="col-md-2">
+            
+            
+            <div class="input-group">
+                <input type="text" name="posts[aanew]" id="aanew" value="{$aanew}" class="form-control">
+                <span class="input-group-addon">秒</span>
+                <div class="input-group-btn">
+                  <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">快捷输入 <span class="caret"></span></button>
+                  
+                  <ul class="dropdown-menu" role="menu">
+                    <li><a href="javascript:" onclick="$('#aanew').val(86400);">1天(86400秒)</a></li>
+                    <li><a href="javascript:" onclick="$('#aanew').val(86400*2);">2天(172800秒)</a></li>
+                    <li><a href="javascript:" onclick="$('#aanew').val(86400*3);">3天(259200秒)</a></li>
+                    <li><a href="javascript:" onclick="$('#aanew').val(86400*4);">4天(345600秒)</a></li>
+                    <li class="divider"></li>
+                    <li><a href="javascript:" onclick="$('#aanew').val(86400*7);">1星期(604800秒)</a></li>
+                  </ul>
+                </div>
+              </div>
+               
+          </div>
+        </div>
+        
+        
+        
+        <div class="form-group">
+          <label class="col-md-2 control-label required">标记"热"查看数</label>
+          <div class="col-md-2">
+            <input type="text" name="posts[aahot]" id="aahot" value="{$aahot}" class="form-control">
+          </div>
+        </div>
+        
+        
+        <div class="form-group">
+          <label class="col-md-2 control-label">标题颜色选项</label>
+          <div class="col-md-4">
+          <textarea class="form-control" rows="10" name="posts[aacolor]" id="aacolor">{$aacolor}</textarea>
+              <div class="help-block">颜色值,名称.每行一个,如: "#fff,白色"</div>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-primary" value="提交" />
+            <input type="reset" class="btn btn-default" value="重置" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	 
+</script> 
+{template 'footer'}

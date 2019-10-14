@@ -1,0 +1,24 @@
+{if $items}
+{loop $items $item}
+<div class="item">
+              <div class="item-heading">
+              
+                <h4>{if $item['new']}<span class="label label-success">NEW</span>&nbsp; {/if}<a style="color:{$item[color]}" href="{$item[url]}">{$item[title]}</a></h4>
+              </div>
+              
+              <div class="item-footer">
+              
+                <span class="text-muted"><i class="icon-time"></i> {$item[posttime]}</span>
+                
+                by: <a href="{$item[byurl]}">{$item[by]}</a>
+                
+              </div>
+            </div>
+            {/loop}
+            {else}
+            <div style="margin:40px 0">
+            <div class="alert alert-info">
+            <strong>没有搜索到相关信息!</strong>
+          </div>
+          </div>
+            {/if}

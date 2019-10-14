@@ -1,0 +1,79 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side_ust'}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+      <legend>数据库</legend>
+      <ul class="nav nav-tabs">
+        <li><a href="{AYA_ADMIN_URL}?action=ust_sql">备份</a></li>
+        <li class="active"><a href="###">导入</a></li>
+      </ul>
+      <div class="mt-20"></div>
+      <form class="form-horizontal" role="form" id="{random()}" action="{AYA_ADMIN_URL}?action=ust_sql_d"
+	method="post" onsubmit="if(confirm('确定要删除吗?')) aya_post(this.id);return false;">
+        <div class="form-group">
+          <label class="col-md-1 control-label">所有备份</label>
+          <div class="col-md-11">
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th style="width: 40px"> </th>
+                  <th>备份名</th>
+                  <th>说明</th>
+                  <th>操作</th>
+                </tr>
+              </thead>
+              <tbody>
+              
+              {loop $baks $k $v}
+              <tr>
+                <td><input name="posts[ids][]" type="checkbox"
+				value="{$k}"  /></td>
+                <td>
+                {if $_GET['new']==$k}<span class="label label-warning">new</span>{/if}
+                {$k}</td>
+                <td>{$v}</td>
+                <td><button type="button" class="btn btn-default btn-mini" onclick="if(confirm('确定要删除吗?')) aya_get('{AYA_ADMIN_URL}?action=ust_sql_d&id={$k}')"><span class="icon-remove"></span></button>&nbsp;&nbsp;
+  <button type="button" class="btn btn-primary btn-mini" onclick="if(confirm('确定要导入吗?')) aya_get('{AYA_ADMIN_URL}?action=ust_sql_w&id={$k}')"><span class="icon-edit-sign"></span> 导入</button>
+  <a class="btn btn-success btn-mini" href="{AYA_ADMIN_URL}?action=ust_sql_l&id={$k}"><span class="icon-download-alt"></span> 下载</a>
+  
+  </td>
+              </tr>
+              {/loop}
+                </tbody>
+              
+            </table>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-1 control-label"></label>
+          <div class="col-md-4">
+            <button type="submit" class="btn btn-danger">删除</button>
+            <button type="button" id="checkall" class="btn btn-default">全选</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+
+
+
+$("#checkall").click(function(){
+	if($(this).html()=='全选'){
+		   $("input[name='posts[ids][]']").each(function(){
+     $(this).prop("checked",true);
+   });
+   $(this).html('反选');
+   }else{
+			   $("input[name='posts[ids][]']").each(function(){
+     $(this).prop("checked",false);
+   });
+   $(this).html('全选');	
+		}
+
+   });
+
+</script> 
+{template 'footer'}

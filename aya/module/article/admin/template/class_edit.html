@@ -1,0 +1,22 @@
+
+    <form class="form-horizontal" id="{random()}" action="{$pca}&itemid={$itemid}"
+	method="post" autocomplete="off"
+	onsubmit="aya_post(this.id);return false;">
+ 
+      <div class="form-group">
+        <label class="col-md-2 control-label required">{if !$in_sub}分类组名{else}分类名{/if}</label>
+        <div class="col-md-9">
+          <input type="text" name="posts[name]" id="name" value="{$name}" class="form-control">
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <div class="col-md-offset-2 col-md-9">
+        <button type="submit" class="btn btn-primary">提交</button>
+          <button type="reset" class="btn btn-default">重置</button>
+        </div>
+      </div>
+    </form>
+    <script type="text/javascript">
+	setTimeout(function(){$("#name").focus();}, 500);
+</script> 

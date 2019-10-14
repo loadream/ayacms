@@ -1,0 +1,74 @@
+{template 'header'}
+<link rel='stylesheet' href='{AYA_TURL}aya/swipebox/justifiedgallery.min.css' type='text/css' media='all' />
+<link rel='stylesheet' href='{AYA_TURL}aya/swipebox/swipebox.css' type='text/css' media='screen' />
+<script src='{AYA_TURL}aya/swipebox/justifiedgallery.js'></script>
+<script src='{AYA_TURL}aya/swipebox/jquery.swipebox.min.js'></script>
+<style>
+.level .icon-star{
+	font-size: 16px;
+}
+</style>
+<div class="row">
+  <div class="col-md-2"><diy>
+<diyitem>{diy 'picture_thumb','channelid=$channelid&line=4&number=1&page=1'}</diyitem></diy>
+  </div>
+  <div class="col-md-10">
+  
+  {tag 'pathnav'}
+  
+  <div class="article" style="padding-top:0">
+          <header>
+            <h1 class="text-center" >{$title}</h1>
+            <dl class="dl-inline">
+              <dt>{l('提交')}：</dt>
+          <dd>{date('Y-m-d',$posttime)}</dd>
+          <dd>{$author}</dd>
+              <dt></dt>
+              <dd class="pull-right level text-primary">{if $level} <span class="label label-info">{l('推荐')}</span> {/if}</dd>
+            </dl>
+            <section class="abstract" {if !$note}style="display:none"{/if}>
+              <p><strong>{l('摘要')}：</strong>{$note}</p>
+            </section>
+          </header>
+          
+          <div class="mt-20"></div>
+          
+          <div class="swipeboxEx">
+          {loop $pics $pic $_title}
+    <a href="{AYA_URL}aya/upload/{$pic}" title="{$_title}">
+        <img alt="{$_title}" src="{AYA_URL}aya/upload/{get_4x3($pic)}" />
+    </a>
+    {/loop} 
+</div>
+     <script>
+	$(document).ready(function () {
+		$('.swipeboxEx').each(function (i, el) {
+			$(el).justifiedGallery({rel: 'gal' + i}).on('jg.complete', function () {
+				if (i == 0) $('.swipeboxEx a').swipebox();
+			});
+		});
+	});
+</script>            
+          <div class="mt-20"></div>
+          <section class="article-content">
+{dhtml($content)}
+          </section>
+          <diy>
+<diyitem>{diy 'share_baidu','size=24&align=right'}</diyitem></diy>
+      <footer>
+        <p class="pull-right text-muted"> {l('查看')}：{$hits} </p>
+        <p class="text-important">{if $tag}tags:{else}&nbsp;{/if} 
+          {loop $tag $k $v} <span class="label"><a href="{$v['url']}">{$v['name']}</a></span> {/loop}</p>
+        <ul class="pager pager-justify">
+          <li class="previous {$previous[class]}"><a href="{$previous[url]}"><i class="icon-arrow-left"></i> {$previous[title]}</a></li>
+          <li><a href="{AYA_URL}{$c_dirname}/"><i class="icon-list-ul"></i> {l('目录')}</a></li>
+          <li class="next {$next[class]}"><a href="{$next[url]}">{$next[title]} <i class="icon-arrow-right"></i></a></li>
+        </ul>
+      </footer>
+    </div>
+  {template 'comment'}
+  
+  </div>
+</div>
+
+{template 'footer'}

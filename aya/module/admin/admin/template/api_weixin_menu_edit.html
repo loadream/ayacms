@@ -1,0 +1,117 @@
+<form class="form-horizontal" role="form" id="form1"
+	action="{$pca}&x={$x}&y={$y}" method="post"
+	onsubmit="aya_post(this.id);return false;">
+
+	<div class="form-group">
+		<label class="col-md-2 control-label">菜单名称</label>
+		<div class="col-md-6">
+			<input type="text" id="name" name="posts[name]" value="{$name}" class="form-control">
+
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-md-2 control-label">动作</label>
+		<div class="col-md-6">
+			<select class="form-control" name="posts[type]"
+				onchange="disp_type(this.value)">
+				
+				{if $y==0}<option value="">无</option>{/if}
+				<option value="click" {if $type=='click'}selected{/if}>显示文本</option>
+				<option value="view" {if $type=='view'}selected{/if}>打开网页</option>
+				<option value="pic_id" {if $type=='pic_id'}selected{/if}>显示图片</option>
+				<option value="article_cid" {if $type=='article_cid'}selected{/if}>文章最新</option>
+				<option value="product_cid" {if $type=='product_cid'}selected{/if}>产品最新</option>
+			</select>
+
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-md-2 control-label required">文本</label>
+		<div class="col-md-10">
+		<textarea class="form-control" rows="5" name="posts[text]" id="text">{$text}</textarea>	
+
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-md-2 control-label">详情链接</label>
+		<div class="col-md-10">
+<input type="text" name="posts[link]" id="link" value="{$link}" class="form-control">			
+<div class="help-block">http://开头.没有请留空</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-md-2 control-label required">网页地址</label>
+		<div class="col-md-10">
+<input type="text" name="posts[url]" id="url" value="{$url}" class="form-control">
+<div class="help-block">http://开头.</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-md-2 control-label required">图片ID</label>
+		<div class="col-md-10">
+<input type="text" name="posts[pic_id]" id="pic_id" value="{$pic_id}" class="form-control">
+<div class="help-block">只调用第一项</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-md-2 control-label required">文章栏目ID</label>
+		<div class="col-md-10">
+<input type="text" name="posts[article_cid]" id="article_cid" value="{$article_cid}" class="form-control">
+<div class="help-block"></div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-md-2 control-label required">产品栏目ID</label>
+		<div class="col-md-10">
+<input type="text" name="posts[product_cid]" id="product_cid" value="{$product_cid}" class="form-control">
+<div class="help-block"></div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<label class="col-md-2 control-label"></label>
+		<div class="col-md-10">
+			<div class="help-block">
+			{if $y==0}
+				一级菜单如果有动作,其下子菜单将不会在微信显示; <br />{/if} 菜单名称为空,视为无效菜单,不在微信中显示;
+			</div>
+		</div>
+	</div>
+
+	<div class="form-group">
+		<div class="col-md-offset-2 col-md-10">
+			<input type="submit" class="btn btn-primary" value="提交" />
+            <input type="reset" class="btn btn-default" value="重置" />
+		</div>
+	</div>
+</form>
+
+<div class="clearfix"></div>
+<script type="text/javascript">
+setTimeout(function(){$("#name").focus();}, 500);
+function disp_type(type){
+	$('#form1 div.form-group:gt(1):lt(6)').hide();
+	if(type=='click'){
+		$('#form1 div.form-group:gt(1):lt(2)').show();
+	}else if(type=='view'){
+		$('#form1 div.form-group:gt(3):lt(1)').show();
+	}else if(type=='pic_id'){
+		$('#form1 div.form-group:gt(4):lt(1)').show();
+	}else if(type=='article_cid'){
+		$('#form1 div.form-group:gt(5):lt(1)').show();
+	}else if(type=='product_cid'){
+		$('#form1 div.form-group:gt(6):lt(1)').show();
+	}
+}
+<?php if($y>0 && empty($type)) $type='click';?>
+disp_type('{$type}');
+</script>
+
+

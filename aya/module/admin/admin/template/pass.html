@@ -1,0 +1,44 @@
+{template 'header'}
+<div class="mt-30"></div>
+
+  <div class="col-md-4"> </div>
+  <div class="col-md-4">
+  <div class="main_box" style="margin: 0">
+    <form class="form-horizontal" id="{random()}" action="{AYA_ADMIN_URL}?action=pass"
+	method="post" autocomplete="off"
+	onsubmit="aya_post(this.id);return false;">
+      <legend>修改密码</legend>
+      <div class="form-group">
+        <label class="col-md-2 control-label">用户名</label>
+        <div class="col-md-9">
+          <input type="text" name="posts[name]" id="name" value="{$USER[name]}" class="form-control" disabled >
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label required">新密码</label>
+        <div class="col-md-9">
+          <input type="password" name="posts[password]" id="password" value="" class="form-control">
+        </div>
+      </div>
+      
+      <div class="form-group">
+          <div class="col-md-offset-2 col-md-9">
+            <input type="submit" class="btn btn-primary" value="提交" />
+            <input type="reset" class="btn btn-default" value="重置" />
+          </div>
+        </div>
+    </form>
+    </div>
+  </div>
+  <div class="col-md-4"> </div>
+
+<script type="text/javascript">
+function checkcode(){
+$('#_checkcode').attr('src','{AYA_URL}checkcode.php?'+Math.random());
+$("#checkcode").focus();
+}
+$("#name").focus();
+</script>
+
+
+{template 'footer'}

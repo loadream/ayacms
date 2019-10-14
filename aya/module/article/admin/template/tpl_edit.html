@@ -1,0 +1,199 @@
+{template 'header'}
+<script type="text/javascript" src="aya/include/zclip/jquery.zclip.min.js"></script>
+<div id="side_box" class="side_box">{tag 'side',$c_module}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+        <div class="col-md-12">
+      <legend>模板&nbsp;&nbsp;<small>[{$ALLLANG[$CHANNEL['language']]}] {$CHANNEL['name']}</small></legend>
+      <ul class="nav nav-tabs">
+        <li><a href="{AYA_ADMIN_URL}?action=tpl&channelid={$channelid}&in_module=1">列表</a></li>
+        <li class="active"><a href="javascript:">编辑</a></li>
+      </ul>
+      <div class="mt-20"></div>
+   <!-- start -->
+    <form class="form-horizontal" id="{random()}" action="{AYA_ADMIN_URL}?action=tpl_edit&channelid={$channelid}&in_module=1&name={$name}&dir={$dir}"
+	method="post" autocomplete="off"
+	onsubmit="aya_post(this.id);return false;">
+      <div class="form-group">
+        <label class="col-md-1 control-label">当前文件</label>
+        <div class="col-md-11">
+         <p class="form-control-static"> /{$dir}{$name}</p>
+      
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-1 control-label">源码</label>
+        <div class="col-md-11">
+          <textarea name="posts[content]" id="content" rows="25" class="form-control">{html($content)}</textarea>
+          <div class="mt-5"></div>
+          <button onclick="showpv()" type="button" class="col-md-12 btn btn-info" >预览</button>
+      
+        </div>
+      </div>
+      
+      
+      
+      <div class="form-group">
+      <label class="col-md-1 control-label">工具</label>
+      <div class="col-md-11">
+      
+      <div class="row">
+      <div class="col-md-5">
+      <textarea name="" id="clip_content" rows="8" class="form-control"></textarea>
+      <div class="mt-5"></div>
+      <div class="row">
+       <div class="col-md-3">       
+            <button id="clip_copy" type="button" class="col-md-12 btn btn-default">复制</button>
+    
+    </div>
+    <div class="col-md-9">
+            <button id="text_add" type="button" class="col-md-12 btn btn-info">插入</button>
+    
+    </div>
+      </div>
+      
+      </div>
+       <div class="col-md-7">
+      
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="#tab1" data-toggle="tab">排版布局</a></li> 
+        <li><a href="#tab2" data-toggle="tab">数据调用</a></li>
+        <li><a href="#tab3" data-toggle="tab">表单调用</a></li>
+        <li class="pull-right"><a href="{AYA_ADMIN_URL}?action=bootstrap3" target="bs">更多示例</a></li>
+      </ul>
+         <div class="tab-content">
+          <div class="tab-pane active" id="tab1">
+            <div class="mt-10"></div>
+            {add_iframe()}
+          </div>
+          <div class="tab-pane" id="tab2">
+         <div class="mt-10"></div>
+         {add_diy($client)}
+         <div class="help-block">通用参数: box_class为附加的CSS类;in_cache为是否缓存,默认启用缓存,0为不缓存;<br />标签可选参数: title为自定义标题,当值为hide为隐藏标题; diy_width,diy_height为内部容器的宽和高</div>
+          </div>
+          <div class="tab-pane" id="tab3">
+         <div class="mt-10"></div>
+         {add_field()}
+          </div>
+          
+        </div>
+      
+      
+      </div>
+      </div>
+      
+      
+      
+      
+      </div>
+      
+       
+      
+      </div>
+        <div class="form-group">
+          <label class="col-md-1 control-label">备注</label>
+          <div class="col-md-6">
+            <input type="text" name="posts[note]" id="note" value="{$note}" class="form-control">
+            <div class="help-block"></div>
+          </div>
+        </div>   
+      <div class="form-group">
+        <div class="col-md-offset-1 col-md-11">
+        <button type="submit" class="btn btn-primary">修改</button>
+          <button type="reset" class="btn btn-default">重置</button>
+        </div>
+      </div>
+    </form>
+ 
+   <!-- end -->     
+     </div>
+  </div>
+</div>
+<script type="text/javascript">
+	function showpv(){
+		(new ModalTrigger({showHeader:false,custom: $('#content').val(),width:'80%'})).show();
+	}
+	
+ if($.fn.datetimepicker)
+ {
+     $('.form-datetime').datetimepicker(
+     {
+         weekStart: 1,
+         todayBtn:  1,
+         autoclose: 1,
+         todayHighlight: 1,
+         startView: 2,
+         forceParse: 0,
+         showMeridian: 1,
+         format: 'yyyy-mm-dd hh:ii'
+     });
+ }
+</script>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#clip_copy").zclip({
+			path: "aya/include/zclip/ZeroClipboard.swf",
+			copy: function(){
+			return $("#clip_content").val();
+			},
+			beforeCopy:function(){
+			},
+			afterCopy:function(){
+				$.messager.show('已复制至剪贴板', {type: "success",time: 3000,placement: 'top'});
+			}
+		});
+		
+		$('#text_add').click(function(){
+          $("#content").insertContent($("#clip_content").val());
+        })
+		
+			
+	});
+	
+	
+	function add_clip(text){
+		$("#clip_content").val(text);
+	}
+	
+	//插入光标位置
+	(function($) {
+          $.fn.insertContent = function(myValue, t) {
+              var $t = $(this)[0];
+              if (document.selection) { //ie
+                  this.focus();
+                  var sel = document.selection.createRange();
+                  sel.text = myValue;
+                  this.focus();
+                  sel.moveStart('character', -l);
+                  var wee = sel.text.length;
+                  if (arguments.length == 2) {
+                      var l = $t.value.length;
+                      sel.moveEnd("character", wee + t);
+                      t <= 0 ? sel.moveStart("character", wee - 2 * t - myValue.length) : sel.moveStart("character", wee - t - myValue.length);
+        
+                      sel.select();
+                  }
+              } else if ($t.selectionStart || $t.selectionStart == '0') {
+                  var startPos = $t.selectionStart;
+                  var endPos = $t.selectionEnd;
+                  var scrollTop = $t.scrollTop;
+                  $t.value = $t.value.substring(0, startPos) + myValue + $t.value.substring(endPos, $t.value.length);
+                  this.focus();
+                  $t.selectionStart = startPos + myValue.length;
+                  $t.selectionEnd = startPos + myValue.length;
+                  $t.scrollTop = scrollTop;
+                  if (arguments.length == 2) {
+                      $t.setSelectionRange(startPos - t, $t.selectionEnd + t);
+                      this.focus();
+                  }
+              } else {
+                  this.value += myValue;
+                  this.focus();
+              }
+          };
+      })(jQuery);
+	
+	</script>
+    
+{template 'footer'}

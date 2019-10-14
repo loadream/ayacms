@@ -1,0 +1,89 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side_ust'}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+      <legend>用户</legend>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:">列表</a></li>
+        <li><a href="{AYA_ADMIN_URL}?action=ust_sql_g">新建</a></li>
+        
+            <div class="input-group col-md-3 pull-right">
+                <input type="text" class="form-control" placeholder="ID或用户名或用户组,或日期(格式1974-2-28)">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button">搜索</button>
+                </span>
+              </div>
+      </ul>
+      <div class="mt-20"></div>
+      <form class="form-horizontal" role="form" id="{random()}" action="{$pca}"
+	method="post" onsubmit="if(confirm('确定要删除吗?')) aya_post(this.id);return false;">
+        <div class="form-group">
+          <label class="col-md-2 control-label">所有表</label>
+          <div class="col-md-10">
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th style="width: 40px"> </th>
+                  <th>ID</th>
+                  <th>用户名</th>
+                  <th>用户组</th>
+                  <th>性别</th>
+                  <th>邮箱</th>
+                  <th>注册时间</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              
+              {loop $items $k $v}
+              <tr>
+                <td><input name="ids" type="checkbox" value="{$k}" /></td>
+                <td>{$v[userid]}</td>
+                <td>{$v[username]}</td>
+                <td>{$v[group]}</td>
+                <td>{$v[sex]}</td>
+                <td>{$v[email]}</td>
+                <td>{$v[reg_time]}</td>
+                <td><button type="button" class="btn btn-default btn-mini" onclick="if(confirm('确定要删除吗?')) aya_get('{AYA_ADMIN_URL}?action=ust_user_d&id={$k}')"><span class="icon-remove"></span> 删除</button>
+  <button type="button" class="btn btn-primary btn-mini" onclick="aya_get('{AYA_ADMIN_URL}?action=ust_user_d&id={$k}')"><span class="icon-edit"></span> 编辑</button> <button type="button" class="btn btn-info btn-mini" data-remote="{AYA_ADMIN_URL}?action=ust_user_s&id={$k}" data-toggle="modal"><span class="icon-user"></span> 详细</button></td>
+              </tr>
+              {/loop}
+                </tbody>
+              
+            </table>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label"></label>
+          <div class="col-md-10">
+            <button type="submit" class="btn btn-danger">删除</button>
+            <button type="button" id="checkall" class="btn btn-default">全选</button>
+        {$pages}
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+
+
+
+$("#checkall").click(function(){
+	if($(this).html()=='全选'){
+		   $("input[name=ids]").each(function(){
+     $(this).prop("checked",true);
+   });
+   $(this).html('反选');
+   }else{
+			   $("input[name=ids]").each(function(){
+     $(this).prop("checked",false);
+   });
+   $(this).html('全选');	
+		}
+
+   });
+
+</script> 
+{template 'footer'}

@@ -1,0 +1,103 @@
+{template 'header'}
+<style>
+.level .icon-star {
+	font-size: 16px;
+}
+</style>
+<div class="row">
+	<div class="col-md-2"><diy>
+<diyitem>{diy 'article_thumb','channelid=$channelid&line=4&number=1&page=1'}</diyitem></diy></div>
+	<div class="col-md-10">
+		{tag 'pathnav'}
+		<div class="mt-20"></div>
+		<div class="list">
+			<header>
+				{template 'cs_1'}
+				<div class="mt-30"></div>
+				<div class="pull-right">
+
+					<div class="btn-group">
+						<button class="btn btn-sm btn-inverse dropdown-toggle"
+							data-toggle="dropdown">
+							<?php if($o=='posttime'){
+                ?>
+							<i class="icon-time"></i>
+							{l('发表时间')}
+							<span class="caret"></span>
+						</button>
+						<?php
+                }elseif($o=='hits'){
+                ?>
+						<i class="icon-eye-open"></i>
+						{l('人气')}
+						<span class="caret"></span>
+						</button>
+						<?php
+                }elseif($o=='level'){
+                ?>
+						<i class="icon-star"></i>
+						{l('推荐度')}
+						<span class="caret"></span>
+						</button>
+						<?php
+                }else{?>
+						<i class="icon-th-list"></i>
+						{l('默认排序')}
+						<span class="caret"></span>
+						</button>
+						<?php
+                }?>
+
+						<ul class="dropdown-menu">
+							<li>
+								<a href="{AYA_URL}{$c_path}">
+									<i class="icon-th-list"></i>
+									{l('默认排序')}
+								</a>
+							</li>
+							<li>
+								<a href="{AYA_URL}{$c_path}?o=posttime">
+									<i class="icon-time"></i>
+									{l('发表时间')}
+								</a>
+							</li>
+							<li>
+								<a href="{AYA_URL}{$c_path}?o=hits">
+									<i class="icon-eye-open"></i>
+									{l('人气')}
+								</a>
+							</li>
+							<li>
+								<a href="{AYA_URL}{$c_path}?o=level">
+									<i class="icon-star"></i>
+									{l('推荐度')}
+								</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+				<h3>
+					<i class="icon-list-ul icon-border-circle"></i>
+					{$c_name} &nbsp;
+					<small> {l('共有%s信息',$sum)}</small>
+				</h3>
+			</header>
+
+
+
+			<section class="items items-hover">{if $c_config=='title'}
+				{template 'article_list_title'} {elseif $c_config=='thumb'}
+				{template 'article_list_thumb'} {else} {template
+				'article_list'} {/if}</section>
+
+			<div class="mt-20"></div>
+
+			{$pages}
+		</div>
+
+
+	</div>
+</div>
+
+
+{template 'footer'}

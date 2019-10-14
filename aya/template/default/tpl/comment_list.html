@@ -1,0 +1,74 @@
+<div >
+        <div class="comments">
+          <header>
+            <div class="pull-right"><a href="#comment_content" class="btn btn-info"><i class="icon-comment-alt"></i> {l('发表评论')}</a></div>
+            <h3><i class="icon-comments icon-border-circle"></i> {$sum} {l('评论')}</h3>
+
+          </header>
+          <div class="mt-10"></div>
+          <section class="comments-list">
+           {loop $items $item}
+           
+            <div class="comment">
+              <a href="javascript:void(0)" class="avatar"><i class="icon-user icon-border icon-2x icon-muted"></i></a>
+              <div class="content">
+                <div class="pull-right"><span class="text-muted">{$item['posttime']}</span> &nbsp;<strong>#{$item['lou']}</strong></div>
+                <span class="author">
+                  <a href="javascript:void(0)"><strong>{html($item['author'])}</strong></a>
+                </span>
+
+                <div class="text">
+                  {html($item['content'])}
+                </div>
+
+              </div>
+            </div>
+            {/loop}
+            
+          </section>
+          <footer>
+          <div class="mt-20"></div>
+            <div class="reply-form" id="commentReplyForm">
+              <a href="###" class="avatar"><i class="icon-user icon-border icon-2x icon-muted"></i></a>
+              <div class="form">
+               <form class="form-horizontal" id="{random()}" action="{AYA_URL}ajax.php?fun=comment&channelid={$channelid}&itemid={$itemid}"
+	method="post" autocomplete="off"
+	onsubmit="aya_post(this.id);return false;">
+                  <div class="form-group">
+                  <div class="col-md-12">
+                    <textarea id="comment_content" class="form-control new-comment-text" rows="2" placeholder="{l('说点什么')}" name="posts[content]"></textarea>
+                    </div>
+                  </div>
+                 
+                    <div class="form-group">
+          <div class="col-md-3">
+            <input type="submit" class="btn btn-block btn-primary" value="<?php echo l('提交')?>" />
+          </div>
+          <div class="col-md-2" id="comment_checkcode_box"></div>
+         <div class="col-md-3" id="comment_checkcode_img"></div>
+        </div>
+                </form>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </div>
+      
+      <script type="text/javascript">
+	  
+ $(function(){
+$('#comment_content').focus(function()
+{ 
+if(!$('#comment_checkcode_box').html()){
+$('#comment_checkcode_box').html('<input type="text" id="comment_checkcode" name="posts[checkcode]" class="form-control" placeholder="<?php echo l('请输入验证码')?>" />');
+$('#comment_checkcode_img').html('<a href="javascript:comment_checkcode()"><img style="height:32px" class="img-rounded" src="<?php echo AYA_URL?>checkcode.php" id="__checkcode"/></a>');
+}
+})
+ });	  
+
+
+function comment_checkcode(){
+$('#__checkcode').attr('src','<?php echo AYA_URL?>checkcode.php?'+Math.random());
+$("#comment_checkcode").focus();
+}
+</script> 

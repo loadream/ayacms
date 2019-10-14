@@ -1,0 +1,56 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side_set'}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+      <form class="form-horizontal" role="form" id="{random()}" action="{$pca}"
+	method="post" onsubmit="aya_post(this.id);return false;">
+    <legend>SMTP设置</legend>
+        
+        <div class="form-group">
+          <label class="col-md-2 control-label required">邮件服务器</label>
+          <div class="col-md-4">
+            <input type="text" name="posts[smtp_host]" id="smtp_host" value="{$smtp_host}" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label required">端口号</label>
+          <div class="col-md-4">
+            <input type="text" name="posts[smtp_port]" id="smtp_port" value="{$smtp_port}" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label required">用户名</label>
+          <div class="col-md-4">
+            <input type="text" name="posts[smtp_username]" id="smtp_username" value="{$smtp_username}" class="form-control">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="col-md-2 control-label required">用户密码</label>
+          <div class="col-md-4">
+            <input type="text" name="posts[smtp_password]" id="smtp_password" value="{$smtp_password}" class="form-control">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label required">发件人邮箱</label>
+          <div class="col-md-4">
+            <input type="text" name="posts[smtp_from]" id="smtp_from" value="{$smtp_from}" class="form-control">
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <div class="col-md-offset-2 col-md-10">
+            
+            <input type="submit" class="btn btn-primary" value="提交" />
+            <input type="reset" class="btn btn-default" value="重置" />
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	 
+</script> 
+{template 'footer'}

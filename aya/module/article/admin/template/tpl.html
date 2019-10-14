@@ -1,0 +1,185 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side',$c_module}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+      <legend>模板&nbsp;&nbsp;<small>[{$ALLLANG[$CHANNEL['language']]}] {$CHANNEL['name']}</small></legend>
+      <ul class="nav nav-tabs">
+        <li class="active"><a href="javascript:">列表</a></li>
+        
+      </ul>
+      <div class="mt-20"></div>
+      
+      <h3>电脑 <small>当前风格:{$CFG['template_pc']}</small></h3>
+      <form class="form-horizontal">
+
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th style="">文件名</th>
+                  <th style="">路径</th>
+                  <th>备注</th>
+                  <th style="width:100px">属性</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              {php $s='pc';}
+              {loop ${$s.'v'} $k $v}
+              <tr>
+                <td><strong>{$k}</strong> <span class="text-primary">[正在使用]</span></td>
+                <td>/{$v[dir]}</td>
+                <td>{$v[name]}</td>
+                <td>私有</td>
+                <td>
+                <button type="button" class="btn btn-default btn-mini" onclick="if(confirm('删除后将使用默认模板,是否继续?')) aya_get('{AYA_ADMIN_URL}?action=tpl_del&channelid={$channelid}&in_module=1&name={$k}&dir={$v['dir']}')"><span class="icon-remove"></span></button>
+                
+                <button type="button" class="btn btn-primary btn-mini" onclick="location='{AYA_ADMIN_URL}?action=tpl_edit&channelid={$channelid}&in_module=1&name={$k}&dir={$v['dir']}&client={$CFG['template_pc']}'"><span class="icon-edit"></span> 编辑</button>
+                  
+                </td>
+              </tr>
+              {/loop}
+              
+              
+             {loop ${$s.'2v'} $k $v}
+              <tr>
+                <td><strong>{$k}</strong> {if !isset($pcv[$k])}<span class="text-primary">[正在使用]</span>{/if}</td>
+                <td>/{$v[dir]}</td>
+                <td>{$v[name]}</td>
+                <td>共用模板</td>
+                <td>
+                <button type="button" class="btn btn-primary btn-mini" onclick="location='{AYA_ADMIN_URL}?action=tpl_edit&channelid={$channelid}&in_module=1&name={$k}&dir={$v['dir']}&client={$CFG['template_pc']}'"><span class="icon-edit"></span> 编辑</button>
+                
+                  <button type="button" class="btn btn-primary btn-mini" onclick="{if $v[alert]}if(confirm('私有文件已存在,是否覆盖?')) {/if} aya_get('{AYA_ADMIN_URL}?action=tpl_save&channelid={$channelid}&in_module=1&name={$k}&dir={$v['dir']}&s={$s}')"><span class="icon-edit"></span> 存为私有</button>
+                 
+                  
+                </td>
+              </tr>
+              {/loop}
+              
+              
+                </tbody>
+              
+            </table>
+            
+      </form>
+      
+           <div class="mt-20"></div>
+      
+      <h3>触摸设备 <small>当前风格:{$CFG['template_tc']}</small></h3>
+      <form class="form-horizontal">
+
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th style="">文件名</th>
+                  <th style="">路径</th>
+                  <th>备注</th>
+                  <th style="width:100px">属性</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              {php $s='tc';}
+              {loop ${$s.'v'} $k $v}
+              <tr>
+                <td><strong>{$k}</strong> <span class="text-primary">[正在使用]</span></td>
+                <td>/{$v[dir]}</td>
+                <td>{$v[name]}</td>
+                <td>私有</td>
+                <td>
+                <button type="button" class="btn btn-default btn-mini" onclick="if(confirm('删除后将使用默认模板,是否继续?')) aya_get('{AYA_ADMIN_URL}?action=tpl_del&channelid={$channelid}&in_module=1&name={$k}&dir={$v['dir']}')"><span class="icon-remove"></span></button>
+                
+                <button type="button" class="btn btn-primary btn-mini" onclick="location='{AYA_ADMIN_URL}?action=tpl_edit&channelid={$channelid}&in_module=1&name={$k}&dir={$v['dir']}&client={$CFG['template_tc']}'"><span class="icon-edit"></span> 编辑</button>
+                  
+                </td>
+              </tr>
+              {/loop}
+              
+              
+             {loop ${$s.'2v'} $k $v}
+              <tr>
+                <td><strong>{$k}</strong> {if !isset($tcv[$k])}<span class="text-primary">[正在使用]</span>{/if}</td>
+                <td>/{$v[dir]}</td>
+                <td>{$v[name]}</td>
+                <td>共用模板</td>
+                <td>
+                <button type="button" class="btn btn-primary btn-mini" onclick="location='{AYA_ADMIN_URL}?action=tpl_edit&channelid={$channelid}&in_module=1&name={$k}&dir={$v['dir']}&client={$CFG['template_tc']}'"><span class="icon-edit"></span> 编辑</button>
+                
+                <button type="button" class="btn btn-primary btn-mini" onclick="{if $v[alert]}if(confirm('私有文件已存在,是否覆盖?')) {/if} aya_get('{AYA_ADMIN_URL}?action=tpl_save&channelid={$channelid}&in_module=1&name={$k}&dir={$v['dir']}&s={$s}')"><span class="icon-edit"></span> 存为私有</button>
+                 
+                  
+                </td>
+              </tr>
+              {/loop}
+              
+              
+                </tbody>
+              
+            </table>
+            
+      </form>
+      
+       <div class="mt-20"></div>
+      
+      <h3>微信 <small>当前风格:{$CFG['template_wx']}</small></h3>
+      <form class="form-horizontal">
+
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th style="">文件名</th>
+                  <th style="">路径</th>
+                  <th>备注</th>
+                  <th style="width:100px">属性</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+              {php $s='wx';}
+              {loop ${$s.'v'} $k $v}
+              <tr>
+                <td><strong>{$k}</strong> <span class="text-primary">[正在使用]</span></td>
+                <td>/{$v[dir]}</td>
+                <td>{$v[name]}</td>
+                <td>私有</td>
+                <td>
+                <button type="button" class="btn btn-default btn-mini" onclick="if(confirm('删除后将使用默认模板,是否继续?')) aya_get('{AYA_ADMIN_URL}?action=tpl_del&channelid={$channelid}&in_module=1&name={$k}&dir={$v['dir']}')"><span class="icon-remove"></span></button>
+                
+                <button type="button" class="btn btn-primary btn-mini" onclick="location='{AYA_ADMIN_URL}?action=tpl_edit&channelid={$channelid}&in_module=1&name={$k}&dir={$v['dir']}&client={$CFG['template_wx']}'"><span class="icon-edit"></span> 编辑</button>
+                  
+                </td>
+              </tr>
+              {/loop}
+              
+              
+             {loop ${$s.'2v'} $k $v}
+              <tr>
+                <td><strong>{$k}</strong> {if !isset($wxv[$k])}<span class="text-primary">[正在使用]</span>{/if}</td>
+                <td>/{$v[dir]}</td>
+                <td>{$v[name]}</td>
+                <td>共用模板</td>
+                <td>
+                <button type="button" class="btn btn-primary btn-mini" onclick="location='{AYA_ADMIN_URL}?action=tpl_edit&channelid={$channelid}&in_module=1&name={$k}&dir={$v['dir']}&client={$CFG['template_wx']}'"><span class="icon-edit"></span> 编辑</button>
+                
+                <button type="button" class="btn btn-primary btn-mini" onclick="{if $v[alert]}if(confirm('私有文件已存在,是否覆盖?')) {/if} aya_get('{AYA_ADMIN_URL}?action=tpl_save&channelid={$channelid}&in_module=1&name={$k}&dir={$v['dir']}&s={$s}')"><span class="icon-edit"></span> 存为私有</button>
+                 
+                  
+                </td>
+              </tr>
+              {/loop}
+              
+              
+                </tbody>
+              
+            </table>
+            
+      </form>
+      
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+
+</script> 
+{template 'footer'}

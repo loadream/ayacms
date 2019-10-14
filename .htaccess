@@ -1,0 +1,8 @@
+RewriteEngine on
+
+RewriteBase /
+RewriteRule ^(.*)include/ueditor/(.*)$ $0 [L]
+RewriteRule ^(.*)/show-([0-9]+)\.html$ $1/show.php?itemid=$2&%{QUERY_STRING}
+RewriteRule ^(.*)/(.*)-([0-9]+)\.html$ $1/show.php?sign=$2&tag=$2&page=$3&%{QUERY_STRING}
+RewriteRule ^(.*)/([^0-9](.*))\.html$ $1/show.php?sign=$2&tag=$2&%{QUERY_STRING}
+RewriteRule ^(.*)/([0-9]+)\.html$ $1/index.php?page=$2&%{QUERY_STRING}

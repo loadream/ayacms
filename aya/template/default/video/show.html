@@ -1,0 +1,80 @@
+{template 'header'}
+<style>
+.level .icon-star{
+	font-size: 16px;
+}
+</style>
+<div class="row">
+  <div class="col-md-2"><diy></diy></div>
+  <div class="col-md-10"> {tag 'pathnav'}
+    <div class="article" style="padding-top:0">
+      <header>
+        <h1 class="text-center" >{$title}</h1>
+        <dl class="dl-inline">
+          <dt>{l('提交')}：</dt>
+          <dd>{date('Y-m-d H:i:s',$posttime)}</dd>
+          <dt>{$author}</dt>
+          <dd class="pull-right level text-primary">{if $new} <span class="label label-success">{l('新')}</span> {/if}{if $hot}<span class="label label-warning">{l('热')}</span> {/if}{if $level} <span class="label label-info">{l('推荐')}</span> {/if}</dd>
+        </dl>
+        <section class="abstract">
+          <p><strong>{l('摘要')}：</strong>{$note}</p>
+        </section>
+      </header>
+      <div class="mt-20"></div>
+      <?php 
+        $ext=strtolower(pathinfo($vurl,PATHINFO_EXTENSION));
+        $domid=random();
+        
+        if($ext=='swf'){?>
+        
+		<div style="padding:0 40px">
+      <embed src="<?php echo $vurl?>" quality="high"
+				width="100%" height="470"
+				align="middle" allowScriptAccess="always"
+				type="application/x-shockwave-flash"></embed>
+				</div>
+      <?php
+									}else{
+                                        
+										?>
+            
+            
+            
+         <div id="a1"></div>
+<script type="text/javascript" src="<?php echo AYA_URL?>aya/include/ckplayer/ckplayer.js" charset="utf-8"></script>
+<script type="text/javascript"> 
+	var flashvars={
+		f:'<?php echo $vurl?>',
+		c:0,
+		b:1
+		};
+	var video=[];
+	CKobject.embed('<?php echo AYA_URL?>aya/include/ckplayer/ckplayer.swf','a1','ckplayer_a1','600','400',false,flashvars,video)	
+	function closelights(){//关灯
+		alert(' 本演示不支持开关灯');
+	}
+	function openlights(){//开灯
+		alert(' 本演示不支持开关灯');
+	}
+</script>
+<?php }?>
+                             
+      <div class="mt-20"></div>
+      <section class="article-content"> {dhtml($content)} </section>
+      <diy>
+<diyitem>{diy 'share_baidu','size=24&align=right'}</diyitem></diy>
+            <footer>
+        <p class="pull-right text-muted"> {l('查看')}：{$hits} </p>
+        <p class="text-important">{if $tag}tags:{else}&nbsp;{/if} 
+          {loop $tag $k $v} <span class="label"><a href="{$v['url']}">{$v['name']}</a></span> {/loop}</p>
+        <ul class="pager pager-justify">
+          <li class="previous {$previous[class]}"><a href="{$previous[url]}"><i class="icon-arrow-left"></i> {$previous[title]}</a></li>
+          <li><a href="{AYA_URL}{$c_dirname}/"><i class="icon-list-ul"></i> {l('目录')}</a></li>
+          <li class="next {$next[class]}"><a href="{$next[url]}">{$next[title]} <i class="icon-arrow-right"></i></a></li>
+        </ul>
+      </footer>
+    </div>
+    {template 'comment'}
+</div>
+</div>
+{template 'footer'}

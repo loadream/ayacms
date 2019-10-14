@@ -1,0 +1,103 @@
+{template 'header'}
+<script type="text/javascript" src="aya/include/zclip/jquery.zclip.min.js"></script>
+<style>
+.btnlist .btn-group{margin-bottom:5px;}
+</style>
+<div id="side_box" class="side_box">{tag 'side',$c_module}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+      <legend>分类&nbsp;&nbsp;<small>[{$ALLLANG[$CHANNEL['language']]}] {$CHANNEL['name']}</small></legend>
+      
+      <div class="mt-20"></div>
+      <button id="order_0" type="button" class="btn btn-info btn-mini" data-remote="{AYA_ADMIN_URL}?action=class_order&channelid={$channelid}&in_module=1" data-toggle="modal"><span class="icon-sort-by-attributes"></span> 排序</button>
+      <button type="button" class="btn btn-primary btn-mini" data-remote="{AYA_ADMIN_URL}?action=class_add&channelid={$channelid}&in_module=1&itemid={$itemid}" data-toggle="modal"><span class="icon-plus"></span> 新建</button>
+      
+      <div class="mt-5"></div>
+      <form class="form-horizontal" role="form" id="{random()}" action="{AYA_ADMIN_URL}?action=class_del&channelid={$channelid}&in_module=1"
+	method="post" onsubmit="if(confirm('确定要删除吗?')) aya_post(this.id);return false;">
+
+            <table class="table table-condensed">
+              <thead>
+                <tr>
+                  <th style="width: 40px"> </th>
+                  <th style="width: 50px">ID</th>
+                  <th style="width: 160px">分类组</th>
+                  <th>分类</th>
+                  <th style="width: 260px"></th>
+                </tr>
+              </thead>
+              <tbody>
+              
+              {loop $items[0] $itemid $name}
+              <tr>
+                <td><input name="posts[ids][]" type="checkbox" value="{$itemid}" /></td>
+                <td>{$itemid}</td>
+                <td>{$name}</td>
+                <td class="btnlist">
+               
+               {loop $CS[$itemid] $k $v}
+               <div class="btn-group">
+               <button type="button" class="btn btn-mini" data-title="更名"  data-remote="{AYA_ADMIN_URL}?action=class_edit&channelid={$channelid}&in_module=1&itemid={$k}&in_sub=1" data-toggle="modal">{$v}</button>
+              <button type="button" class="btn btn-mini" onclick="if(confirm('确定要删除吗?')) aya_get('{AYA_ADMIN_URL}?action=class_del&channelid={$channelid}&in_module=1&itemid={$k}')"><span class="icon-remove"></span></button>
+            </div>
+               {/loop}
+                
+                </td>
+                <td style="position: relative;"> <button type="button" class="btn btn-default btn-mini" onclick="if(confirm('确定要删除吗?')) aya_get('{AYA_ADMIN_URL}?action=class_del&channelid={$channelid}&in_module=1&itemid={$itemid}')"><span class="icon-remove"></span></button>
+                  &nbsp;
+                <button type="button" id="clip_copys" class="btn btn-default btn-mini clip_copy" value="<?php if(is_array($CS[$itemid])) echo implode(',',$CS[$itemid])?>"><span class="icon-copy"></span></button>  
+               <button type="button" class="btn btn-info btn-mini"  data-remote="{AYA_ADMIN_URL}?action=class_edit&channelid={$channelid}&in_module=1&itemid={$itemid}" data-toggle="modal"><span class="icon-edit"></span> 更名</button>
+               <button id="order_{$itemid}" type="button" class="btn btn-info btn-mini" data-remote="{AYA_ADMIN_URL}?action=class_order&channelid={$channelid}&in_module=1&itemid={$itemid}&in_sub=1" data-toggle="modal"><span class="icon-sort-by-attributes"></span> 排序</button>
+                  <button type="button" class="btn btn-primary btn-mini" data-remote="{AYA_ADMIN_URL}?action=class_add&channelid={$channelid}&in_module=1&itemid={$itemid}&in_sub=1" data-toggle="modal"><span class="icon-plus"></span> 新建</button>
+                  </td>
+              </tr>
+              {/loop}
+                </tbody>
+              
+            </table>
+<div class="help-block">
+
+</div>
+            <button type="submit" class="btn btn-danger">删除</button>
+            <button type="button" id="checkall" class="btn btn-default">全选</button>
+        
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+
+$(document).ready(function(){
+		$(".clip_copy").zclip({
+			path: "aya/include/zclip/ZeroClipboard.swf",
+			copy: function(){
+			return $(this).val();
+			},
+			beforeCopy:function(){
+			},
+			afterCopy:function(){
+				$.messager.show('分类已复制至剪贴板', {type: "success",time: 3000,placement: 'top'});
+			}
+		});
+		
+			
+	});
+
+$("#checkall").click(function(){
+	if($(this).html()=='全选'){
+		   $("input[name='posts[ids][]']").each(function(){
+     $(this).prop("checked",true);
+   });
+   $(this).html('反选');
+   }else{
+			   $("input[name='posts[ids][]']").each(function(){
+     $(this).prop("checked",false);
+   });
+   $(this).html('全选');	
+		}
+
+   });
+
+</script> 
+{template 'footer'}

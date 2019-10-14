@@ -1,0 +1,71 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side_api'}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+      <form class="form-horizontal" role="form" id="{random()}" action="{$pca}"
+	method="post" onsubmit="aya_post(this.id);return false;">
+    <legend>微信</legend>
+      <ul class="nav nav-tabs">
+        <li><a href="{AYA_ADMIN_URL}?action=api_weixin">基本</a></li>
+        <li class="active"><a href="javascript:">菜单</a></li>
+      </ul>
+      <div class="mt-20"></div>
+         <div class="form-group">
+          <label class="col-md-2 control-label">配置菜单</label>
+          <div class="col-md-10">
+          
+          <div class="row">
+<?php for($m=0;$m<3;$m++){?>          
+          <div class="col-md-4">
+<?php for($i=1;$i<6;$i++){?>
+<button id="menu_{$m}_{$i}" type="button" class="btn btn-large btn-block btn-default" data-remote="{AYA_ADMIN_URL}?action=api_weixin_menu_edit&x={$m}&y={$i}" data-toggle="modal">{php echo strlen($menu[$m][$i]['name'])?$menu[$m][$i]['name']:'NULL'} </button>
+<?php }?>
+<button id="menu_{$m}_0" type="button" class="btn btn-large btn-lg btn-block btn-primary" data-remote="{AYA_ADMIN_URL}?action=api_weixin_menu_edit&x={$m}&y=0" data-toggle="modal">{php echo strlen($menu[$m][0]['name'])?$menu[$m][0]['name']:'NULL'} </button>
+
+</div>
+<?php }?>
+
+          </div>
+
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="col-md-2 control-label"></label>
+          <div class="col-md-10">
+        <div class="help-block">
+深色按钮代表一级菜单,其上5项为其子菜单;
+<br />
+名称为空的菜单为无效菜单,不在微信中显示;
+</div>
+          </div>
+        </div>
+        <div class="mt-30"></div>
+  <div class="form-group">
+          <label class="col-md-2 control-label"></label>
+          <div class="col-md-10">
+   <button type="button" class="btn btn-large btn-primary" onclick="aya_get('{AYA_ADMIN_URL}?action=api_weixin_menu_up')">立即更新菜单</button>
+   <button type="button" class="btn btn-large btn-danger" onclick="aya_get('{AYA_ADMIN_URL}?action=api_weixin_menu_del')">立即删除菜单</button>
+          </div>
+        </div>
+         <div class="form-group">
+          <label class="col-md-2 control-label"></label>
+          <div class="col-md-10">
+        <div class="help-block">
+1、自定义菜单最多包括3个一级菜单，每个一级菜单最多包含5个二级菜单。如果一级菜单没有"动作",须至少包含一个二级菜单<br />
+2、一级菜单最多4个汉字，二级菜单最多7个汉字，多出来的部分将会以“...”代替。<br />
+3、创建自定义菜单后，由于微信客户端缓存，需要24小时微信客户端才会展现出来。测试时可以尝试取消关注公众账号后再次关注，则可以看到创建后的效果<br />
+4、反复取消关注申请关注后,由于微信缓存原因,需要第二次进入才会显示菜单.
+</div>
+          </div>
+        </div>   
+
+
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	$("#aya_a").focus(); 
+</script> 
+{template 'footer'}

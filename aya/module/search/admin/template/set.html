@@ -1,0 +1,36 @@
+{template 'header'}
+<div id="side_box" class="side_box">{tag 'side',$c_module}</div>
+<div class="main_box_w">
+  <div id="main_box" class="main_box">
+    <div class="col-md-12">
+    <legend>配置&nbsp;&nbsp;<small>[{$ALLLANG[$CHANNEL['language']]}] {$CHANNEL['name']}</small></legend>
+    
+      <div class="mt-20"></div>
+    <form class="form-horizontal" id="{random()}" action="{AYA_ADMIN_URL}?action=set&channelid={$channelid}&in_module=1"
+	method="post" autocomplete="off"
+	onsubmit="aya_post(this.id);return false;">
+    
+      <div class="form-group">
+        <label class="col-md-1 control-label">每页数量</label>
+        <div class="col-md-2">
+          <input type="text" name="posts[pagesize]" id="pagesize" value="{$pagesize}" class="form-control">
+        </div>
+      </div>
+    
+      
+      <div class="form-group">
+        <div class="col-md-offset-1 col-md-11">
+        <button type="submit" class="btn btn-primary">提交</button>
+          <button type="reset" class="btn btn-default">重置</button>
+        </div>
+      </div>
+    </form>
+ 
+   <!-- end -->     
+     </div>
+  </div>
+</div>
+<script type="text/javascript"> 
+ 
+</script>
+{template 'footer'}
