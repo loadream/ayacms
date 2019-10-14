@@ -1,8 +1,10 @@
-#AyaCMS 3.1.2
+#AyaCMS 3.1.2  
+
 
 演示地址:  
 
 http://www.superqun.com/    
+
 
 
 AyaCMS,Php+MySQL环境下的开源建站系统.  
