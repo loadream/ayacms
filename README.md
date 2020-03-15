@@ -1,7 +1,6 @@
 #AyaCMS 3.1.2  
 
-
-演示地址:  http://www.superqun.com/  
+https://www.loadream.com/loadream-2355-1-1.html
 
 
 AyaCMS,Php+MySQL环境下的开源建站系统.  
