@@ -1,8 +1,5 @@
 #AyaCMS 3.1.2  
 
-https://www.loadream.com/loadream-2355-1-1.html
-
-
 AyaCMS,Php+MySQL环境下的开源建站系统.  
 
 支持模板可视化,标签可视化操作.拖拽排版,所见即所得;  
